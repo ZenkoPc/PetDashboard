@@ -17,6 +17,6 @@ import { upsertSuperAdmin } from './auth/seed/users.js'
   app.use(routes)
 
   app.listen(app.get('APP_PORT'), () => {
-    console.log(`Shop API listen on port ${app.get('APP_PORT')}\nhttp://localhost:${app.get('APP_PORT')}`)
+    console.log(`Pet Admin API listen on port ${app.get('APP_PORT')}\nhttp://localhost:${app.get('APP_PORT')}`)
   })
 })()
