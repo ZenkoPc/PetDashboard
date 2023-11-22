@@ -1,32 +1,40 @@
 import { LockClosedIcon, UserIcon } from "@heroicons/react/24/solid"
-import { Card, Title, Flex, Button, Metric, TextInput } from "@tremor/react"
+import { Card, Title, Flex, Button, Metric, TextInput, Text } from "@tremor/react"
 import { useState } from "react"
+import { fetchLogin } from "../hooks/fetchLogin"
 import { useUserStatus } from "../store/useUserStatus"
 
 export const Login = () => {
 
-    const [usernameError, setUsernameError] = useState(false)
-    const [passwordError, setPasswordError] = useState(false)
-    const validate = useUserStatus(store => store.validate)
+    const [error, setError] = useState('')
+    const setSession = useUserStatus(store => store.setSession)
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const username = e.currentTarget.username.value.toString()
         const password = e.currentTarget.password.value.toString()
 
-        if(username.length < 4){
-            setUsernameError(true)
-            
-            if(password.length < 8){
-                setPasswordError(true)
+        const data = await fetchLogin(username, password)
+        
+        switch (data.status){
+            case 'auth:login:invalid' : {
+                setError(data?.message)
                 return
             }
-
-            return
+            case 'validation:bad-request': {
+                setError(data?.errors[0])
+                return
+            }
+            case 'global:server-error': {
+                setError(data?.message)
+                return
+            }
+            case 200: {
+                setSession(data?.data?.data?.session?.token?.value, data?.data?.data?.user?.role)
+                return
+            }
         }
-
-        validate(username, password)
 
     }
 
@@ -42,10 +50,8 @@ export const Login = () => {
                         <Title className="text-2xl mb-2">
                             Email:
                         </Title>
-                        <TextInput 
-                            onChange={() => setUsernameError(false)} 
-                            error={usernameError} 
-                            errorMessage="Put a valid username." 
+                        <TextInput
+                        onChange={() => setError('')}
                             name="username" icon={UserIcon} 
                             placeholder="JohnDoe123" 
                         />
@@ -53,13 +59,14 @@ export const Login = () => {
                             Password:
                         </Title>
                         <TextInput 
-                            onChange={() => setPasswordError(false)} 
-                            error={passwordError} 
-                            errorMessage="The password is not valid." 
+                        onChange={() => setError('')}
                             name="password" icon={LockClosedIcon} 
                             type="password" 
                             placeholder="*****" 
                         />
+                        <Text color="red" className="capitalize mt-5">
+                            {error}
+                        </Text>
                     </Flex>
                     <Flex justifyContent="end" className="border-t w-full space-x-2 pt-4">
                         <Button type="submit">
