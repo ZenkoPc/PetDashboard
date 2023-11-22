@@ -1,5 +1,6 @@
 import 'dotenv/config.js'
 import express from 'express'
+import cors from 'cors'
 import { routes } from './routes.js'
 import { upsertSuperAdmin } from './auth/seed/users.js'
 
@@ -10,10 +11,12 @@ import { upsertSuperAdmin } from './auth/seed/users.js'
 
   const PORT = process.env.PORT ?? 3030
 
+  app.set('APP_PORT', PORT)
+
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
+  app.use(cors())
 
-  app.set('APP_PORT', PORT)
   app.use(routes)
 
   app.listen(app.get('APP_PORT'), () => {
