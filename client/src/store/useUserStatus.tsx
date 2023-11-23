@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface Props {
+export interface Props {
     isAuth: boolean
     token: string
     role: string
@@ -20,7 +20,7 @@ export const useUserStatus = create(persist<Props>((set) => ({
                 role
             })
         },
-        closeSesion: () => set({ isAuth: false, role: '' })
+        closeSesion: () => set({ isAuth: false, role: '', token: '' })
     }), {
         name: 'auth'
     }
