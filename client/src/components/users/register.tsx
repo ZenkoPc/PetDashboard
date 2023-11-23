@@ -1,13 +1,12 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels, Text, Title } from "@tremor/react"
 import { AllUsers } from "./allUsers"
 import { NewUser } from "./newUsers"
+import { LogoDashboard } from "../logoDashboard"
 
 export const Register = () => {
     return (
         <main className="h-screen [&>*]:px-5 max-h-screen pb-10 overflow-y-scroll w-full">
-                <div className="py-5 border-b px-5 bg-gradient-to-r from-purple-600 to-purple-950 bg-clip-text text-transparent font-bold text-lg">
-                    / Dashboard 
-                </div>
+                <LogoDashboard />
                 <Title className="mt-5">
                     Users
                 </Title>
