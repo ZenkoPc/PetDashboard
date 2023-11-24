@@ -43,7 +43,7 @@ export const Login = () => {
             <Metric className="mb-5 text-6xl hidden md:block">
                 Login
             </Metric>
-            <Card className="flex flex-col justify-center items-center md:h-[400px] w-[450px]">
+            <Card className="flex flex-col justify-center items-center w-full md:h-[400px] md:w-[450px]">
                 <Title className="text-4xl mb-10 md:hidden">Login</Title>
                 <form onSubmit={handleSubmit} className="w-full h-full px-5 flex flex-col justify-between">
                     <Flex className="gap-2 mt-10 flex-col items-start">

@@ -98,7 +98,7 @@ export const Register = () => {
         {modal && <Modal close={handleClose} submit={handleSubmit} error={error} />}
             <main className="h-screen max-h-screen overflow-y-scroll [&>*]:px-5 pb-10 w-full">
                 <LogoDashboard />
-                <Flex alignItems="center" className="mt-5">
+                <Flex alignItems="center" className="mt-5 gap-4 items-start md:items-center flex-col md:flex-row">
                     <div>
                         <Title className="">
                             Users
