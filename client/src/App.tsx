@@ -84,7 +84,7 @@ export const App = () => {
           return
         }
         case "auth:login:verified": {
-          setSession(data?.data?.data?.data?.session?.newToken?.value,data?.data?.data?.data?.user?.role)
+          setSession(data?.data?.data?.data?.session?.newToken?.value,data?.data?.data?.data?.user)
           return
         }
       }

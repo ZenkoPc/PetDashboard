@@ -31,7 +31,7 @@ export const Login = () => {
                 return
             }
             case 200: {
-                setSession(data?.data?.data?.session?.token?.value, data?.data?.data?.user?.role)
+                setSession(data?.data?.data?.session?.token?.value, data?.data?.data?.user)
                 return
             }
         }
