@@ -5,7 +5,7 @@ import { useUserStatus } from "../store/useUserStatus"
 
 export const Aside = () => {
 
-    const closeSession = useUserStatus(store => store.closeSesion)
+    const { role, closeSesion } = useUserStatus()
 
     return (
         <aside className="h-screen lg:block min-w-[200px] hidden">
@@ -23,12 +23,12 @@ export const Aside = () => {
                                 Appointments
                             </Text>
                         </Link>
-                        <Link to={'/dashboard/users'} className="flex justify-start px-5 py-2 w-full items-center">
+                        {role === 'super_admin' && <Link to={'/dashboard/users'} className="flex justify-start px-5 py-2 w-full items-center">
                             <Icon icon={ServerIcon} />
                             <Text>
                                 Users
                             </Text>
-                        </Link>
+                        </Link>}
                         <Link to={'/dashboard/settings'} className="flex justify-start px-5 py-2 w-full items-center">
                             <Icon icon={Cog6ToothIcon} />
                             <Text>
@@ -36,7 +36,7 @@ export const Aside = () => {
                             </Text>
                         </Link>
                     </Flex>
-                    <Button onClick={closeSession} color="red" variant="secondary" className="ml-3 max-w-max">
+                    <Button onClick={closeSesion} color="red" variant="secondary" className="ml-3 max-w-max">
                         Close Session
                     </Button>
                 </Card>

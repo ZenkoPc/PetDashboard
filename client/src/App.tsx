@@ -15,6 +15,7 @@ import { useVerify } from './hooks/useVerify.tsx'
 import { useUserStatus } from './store/useUserStatus.tsx'
 import { useEffect } from 'react'
 import { LoadingGlobal } from './components/loadingGlobal.tsx'
+import { ProtectedSuperAdmin } from './components/protectedSuperAdmin.tsx'
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'users',
-        element: <Register />
+        element: <ProtectedSuperAdmin><Register /></ProtectedSuperAdmin>
       }
     ]
   },

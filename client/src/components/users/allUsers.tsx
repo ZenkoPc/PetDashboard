@@ -3,12 +3,12 @@ import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/solid"
 import { User } from "../../types/users"
 import { LoadingTable } from "./loadingTable"
 import { useUserStatus } from "../../store/useUserStatus"
-import { UseQueryResult, useMutation } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { petAdmin } from "../../api/petadmin"
 import { useEffect, useState } from "react"
 import { Alert } from "flowbite-react"
 
-export const AllUsers = ({ users, create }:{ users: UseQueryResult<unknown, Error>, create: UseQueryResult<unknown, Error> }) => {
+export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
 
     const token = useUserStatus(store => store.token)
     const [visible, setVisible] = useState(false)
