@@ -15,7 +15,7 @@ export const Modal = ({ close, submit, error }:{ close: () => void, submit: (e: 
                 </Title>
                 <form onSubmit={(e) => submit(e)}>
                     <Flex className="gap-7" flexDirection="col">
-                        <Flex className="mt-5 w-full gap-4">
+                        <Flex className="mt-5 w-full gap-4 flex-col md:flex-row">
                             <Flex flexDirection="col" alignItems="start">
                                 <Text>
                                     Name:
@@ -29,7 +29,7 @@ export const Modal = ({ close, submit, error }:{ close: () => void, submit: (e: 
                                 <TextInput name="lastname" required={true} type="text" placeholder="Doe" />
                             </Flex>
                         </Flex>
-                        <Flex className="w-full gap-4">
+                        <Flex className="w-full gap-4 flex-col md:flex-row">
                             <Flex flexDirection="col" alignItems="start">
                                 <Text>
                                     Email:

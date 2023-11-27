@@ -3,19 +3,19 @@ import { Button, Card, Flex, Icon, Text, Title } from "@tremor/react"
 import { Link } from "react-router-dom"
 import { useUserStatus } from "../store/useUserStatus"
 
-export const MenuResponsive = ({ close }: { close: () => void }) => {
+export const MenuResponsive = ({ close, width }: { close: () => void, width: string }) => {
 
     const role = useUserStatus(store => store.role)
     const closeSesion = useUserStatus(store => store.closeSesion)
 
     return (
         <>
-            <Card className="w-full md:w-[400px] h-full flex flex-col justify-between lg:hidden fixed top-0 z-[1000]">
+            <Card style={{ width: width }} className="md:max-w-[400px] p-0 duration-500 overflow-hidden transition-all h-full flex flex-col justify-between lg:hidden fixed top-0 z-[1000]">
                 <Flex alignItems="center" justifyContent="start" className="flex-col gap-5">
                     <Flex className="p-5 gap-3" justifyContent="start">
                         <Button onClick={close} variant="secondary" icon={Bars3Icon}></Button>
-                        <div className="bg-gradient-to-r from-purple-600 to-fuchsia-700 bg-clip-text">
-                            <Title className="text-transparent">
+                        <div className="bg-gradient-to-r from-blue-700 to-blue-700 bg-clip-text">
+                            <Title className="text-transparent min-w-[200px]">
                                 Pet Admin
                             </Title>
                         </div>
@@ -45,7 +45,7 @@ export const MenuResponsive = ({ close }: { close: () => void }) => {
                         </Text>
                     </Link>
                 </Flex>
-                <Button onClick={closeSesion} color="red" variant="secondary" className="ml-3 max-w-max">
+                <Button onClick={closeSesion} color="red" variant="secondary" className="mb-4 ml-3 max-w-max">
                     Close Session
                 </Button>
             </Card>

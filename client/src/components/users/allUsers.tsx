@@ -7,13 +7,16 @@ import { useMutation } from "@tanstack/react-query"
 import { petAdmin } from "../../api/petadmin"
 import { useEffect, useState } from "react"
 import { Alert } from "flowbite-react"
+import { DeleteModal } from "./deleteModal"
 
 export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
 
     const token = useUserStatus(store => store.token)
     const [visible, setVisible] = useState(false)
+    const [confirmDelete, setConfirmDelete] = useState(false)
+    const [deleteId, setDeleteId] = useState('')
 
-    const handleDelete = useMutation({
+    const deleteUser = useMutation({
         mutationFn: (id: string) => { 
             return petAdmin.delete('/remove/'+id,{
                 headers: {
@@ -23,10 +26,21 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
         }
     })
 
+    const handleVisibleDelete = () => {
+        setConfirmDelete(false)
+    }
+
+    const handleDelete = () => {
+        deleteUser.mutate(deleteId)
+        setDeleteId('')
+        setVisible(true)
+        setConfirmDelete(false)
+    }
+
     useEffect(() => {
         users.refetch()
         setVisible(true)
-    }, [handleDelete.isSuccess])
+    }, [deleteUser.isSuccess])
     
     if(users.isLoading) return <LoadingTable />
 
@@ -34,11 +48,12 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
 
     if(users.isError || create.isError ) return <p>Something has ocurred, try again later</p>
 
-    if(handleDelete.isPending) return <LoadingTable />
+    if(deleteUser.isPending) return <LoadingTable />
 
     return (
     <>
-        {handleDelete.isError && 
+        {confirmDelete && <DeleteModal visible={handleVisibleDelete} handleDelete={handleDelete} />}
+        {deleteUser.isError && 
             <Alert className={`${visible === true ? 'fixed flex justify-between items-center top-3 left-[35%] z-[9999]' : 'hidden'}`} color={'failure'} onDismiss={() => setVisible(false)}>
                 <div className="h-full flex items-center">
                     <Icon color="red" icon={InformationCircleIcon} />
@@ -49,7 +64,7 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
                 </div>
             </Alert>
         }
-        {handleDelete.isSuccess && 
+        {deleteUser.isSuccess && 
             <Alert className={`${visible === true ? 'fixed top-3 left-[35%] z-[9999]' : 'hidden'}`} color={'success'} onDismiss={() => setVisible(false)}>
                 <div className="h-full flex items-center">
                     <Icon color="green" icon={InformationCircleIcon} />
@@ -89,8 +104,8 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
                                 </TableCell>
                                 <TableCell className="flex gap-3">
                                     <Button onClick={() => { 
-                                        handleDelete.mutate(user.id) 
-                                        setVisible(true) 
+                                        setConfirmDelete(true)
+                                        setDeleteId(user.id)
                                     }} color="red" icon={TrashIcon} />
                                 </TableCell>
                             </TableRow>

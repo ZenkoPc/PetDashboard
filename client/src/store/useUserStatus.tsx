@@ -32,7 +32,6 @@ export const useUserStatus = create(persist<Props>((set) => ({
             email: ''
         },
         setSession: (token: string, res: ResUser) => {
-            console.log(res)
             set({ 
                 isAuth: true,
                 token,
