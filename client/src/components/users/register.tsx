@@ -144,7 +144,7 @@ export const Register = () => {
                         <span className="font-medium">
                             Success!
                         </span>
-                        The selected user was created successfully
+                        The user was created successfully
                     </div>
                 </Alert>
             }

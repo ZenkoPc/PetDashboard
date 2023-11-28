@@ -8,6 +8,13 @@ import { petAdmin } from "../../api/petadmin"
 import { useEffect, useState } from "react"
 import { Alert } from "flowbite-react"
 import { DeleteModal } from "./deleteModal"
+import { PencilIcon } from "@heroicons/react/24/outline"
+import { UpdateModal } from "./updateModal"
+
+type Message = {
+    title?: string,
+    message?: string
+}
 
 export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
 
@@ -15,6 +22,11 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
     const [visible, setVisible] = useState(false)
     const [confirmDelete, setConfirmDelete] = useState(false)
     const [deleteId, setDeleteId] = useState('')
+    const [visibleUpdate, setVisibleUpdate] = useState(false)
+    const [selectedUser, setSelectedUser] = useState<User>()
+    const [modalMessage, setModalMessage] = useState<Message>()
+    const [updateError, setUpdateError] = useState('')
+    const [modal,setModal] = useState(false)
 
     const deleteUser = useMutation({
         mutationFn: (id: string) => { 
@@ -23,6 +35,22 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
                     "x-auth-token": "Bearer "+ token
                 }
             })
+        }
+    })
+
+    const updateUser = useMutation({
+        mutationFn: async (user: User) => {
+            return await petAdmin.put(`/edit/${encodeURIComponent(user.id)}`,{
+                name: user.name,
+                lastname: user.lastname,
+                email: user.email,
+                password: user.password,
+                role: user.role
+            },{
+                headers: {
+                    "x-auth-token":"Bearer "+token
+                }   
+            }).catch(err => err.response.data)
         }
     })
 
@@ -37,11 +65,51 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
         setConfirmDelete(false)
     }
 
+    const handleUpdateClose = () => {
+        setVisibleUpdate(false)
+    }
+
+    const handleUpdate = (user: User) => {
+        updateUser.mutate(user)
+    }
+
     useEffect(() => {
+        if(updateUser.data?.status === 200){
+            setVisibleUpdate(false)
+            setVisible(true)
+            setModal(true)
+            setModalMessage({
+                title: 'Success',
+                message: 'The selected user was updated successfully'
+            })
+            users.refetch()
+        }else{
+            if(updateUser.data?.errors){
+                setUpdateError(updateUser.data?.errors[0])
+            }else{
+                setUpdateError(updateUser.data?.message)
+            }
+        }
+
+    }, [updateUser.isSuccess])
+
+    useEffect(() => {
+        setModal(true)
+        setModalMessage({
+            title: 'Success',
+            message: 'The selected user was removed successfully'
+        })
         users.refetch()
-        setVisible(true)
     }, [deleteUser.isSuccess])
-    
+
+    useEffect(() => {
+        setModal(true)
+        setModalMessage({
+            title: 'An error has ocurred!',
+            message: 'Something went wrong, try again later'
+        })
+    }, [deleteUser.isError])
+
     if(users.isLoading) return <LoadingTable />
 
     if(users.isFetching || create.isFetching) return <LoadingTable />
@@ -52,26 +120,16 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
 
     return (
     <>
+        {visibleUpdate && <UpdateModal error={updateError} handleUpdate={handleUpdate} user={selectedUser} close={handleUpdateClose} />}
         {confirmDelete && <DeleteModal visible={handleVisibleDelete} handleDelete={handleDelete} />}
-        {deleteUser.isError && 
-            <Alert className={`${visible === true ? 'fixed flex justify-between items-center top-3 left-[35%] z-[9999]' : 'hidden'}`} color={'failure'} onDismiss={() => setVisible(false)}>
+        {modal && 
+            <Alert className={`${visible === true ? 'fixed flex justify-between items-center top-3 left-[35%] z-[9999]' : 'hidden'}`} color={`${deleteUser.isSuccess || updateUser.isSuccess ? 'success' : 'failure'}`} onDismiss={() => { setModal(false) } }>
                 <div className="h-full flex items-center">
-                    <Icon color="red" icon={InformationCircleIcon} />
+                    <Icon color={`${deleteUser.isSuccess || updateUser.isSuccess ? 'green':'red'}`} icon={InformationCircleIcon} />
                     <span className="font-medium p-0">
-                        An error has ocurred!
+                        {modalMessage?.title}
                     </span>
-                    Something went wrong, try again later
-                </div>
-            </Alert>
-        }
-        {deleteUser.isSuccess && 
-            <Alert className={`${visible === true ? 'fixed top-3 left-[35%] z-[9999]' : 'hidden'}`} color={'success'} onDismiss={() => setVisible(false)}>
-                <div className="h-full flex items-center">
-                    <Icon color="green" icon={InformationCircleIcon} />
-                    <span className="font-medium">
-                        Success!
-                    </span>
-                    The selected user was removed successfully
+                    {modalMessage?.message}
                 </div>
             </Alert>
         }
@@ -103,6 +161,10 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
                                     {user.role}
                                 </TableCell>
                                 <TableCell className="flex gap-3">
+                                    <Button onClick={() => {
+                                        setVisibleUpdate(true)
+                                        setSelectedUser(user)
+                                    }} color="blue" icon={PencilIcon} />
                                     <Button onClick={() => { 
                                         setConfirmDelete(true)
                                         setDeleteId(user.id)
