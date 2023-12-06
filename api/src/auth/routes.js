@@ -1,6 +1,7 @@
 import { Router } from 'express'
+import { Roles } from '../middlewares/constants.js'
 import { schemaValidation } from '../middlewares/zod.js'
-import { superAdminRole } from '../middlewares/super-admin.js'
+import { rolesMiddleware } from '../middlewares/roles.js'
 import { loginController, loginSchema } from './controllers/login.js'
 import { verifyController, verifySchema } from './controllers/verify.js'
 import { registerController, registerSchema } from './controllers/register.js'
@@ -13,12 +14,12 @@ const routes = Router()
 routes.post('/login', schemaValidation(loginSchema), loginController)
 routes.post('/verify', schemaValidation(verifySchema), verifyController)
 
-routes.post('/register', superAdminRole(), schemaValidation(registerSchema), registerController)
-routes.put('/edit/:id', superAdminRole(), schemaValidation(updateSchema), updateController)
+routes.post('/register', rolesMiddleware([Roles.superAdmin]), schemaValidation(registerSchema), registerController)
+routes.put('/edit/:id', rolesMiddleware([Roles.superAdmin]), schemaValidation(updateSchema), updateController)
 
-routes.delete('/remove/:id', superAdminRole(), removeController)
+routes.delete('/remove/:id', rolesMiddleware([Roles.superAdmin]), removeController)
 
-routes.get('/users', superAdminRole(), usersController)
+routes.get('/users', rolesMiddleware([Roles.superAdmin]), usersController)
 
 export {
   routes as authRoutes

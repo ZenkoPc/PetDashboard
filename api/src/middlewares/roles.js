@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { verifyToken } from '../lib/jwt.js'
 
-export function superAdminRole () {
+export function rolesMiddleware (roles = []) {
   /**
    * @param { import('express').Request } req
    * @param { import('express').Response } res
@@ -46,7 +46,7 @@ export function superAdminRole () {
         })
       }
 
-      if (user.role !== 'super_admin') {
+      if (!roles.includes(user.role)) {
         return res.status(403).json({
           status: 'authorization:required',
           message: 'You are not allowed'

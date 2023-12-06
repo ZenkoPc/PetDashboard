@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { authRoutes } from './auth/routes.js'
+import { petRoutes } from './pets/routes.js'
 
 const routes = Router()
 
@@ -11,6 +12,7 @@ routes.get('/', (req, res) => {
 })
 
 routes.use('/auth', authRoutes)
+routes.use('/pets', petRoutes)
 
 routes.all('*', (req, res) => {
   res.status(404).json({
