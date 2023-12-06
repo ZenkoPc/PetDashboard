@@ -12,6 +12,9 @@ module.exports = {
     transparent: "transparent",
     current: "currentColor",
     extend: {
+      screens: {
+        xs: '350px'
+      },
       colors: {
         // light mode
         tremor: {
@@ -128,6 +131,7 @@ module.exports = {
   ],
   plugins: [
     require("@headlessui/tailwindcss"),
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
+    require('tailwindcss-animated')
   ],
 };

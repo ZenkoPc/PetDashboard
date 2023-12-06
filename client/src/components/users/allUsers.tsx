@@ -16,6 +16,10 @@ type Message = {
     message?: string
 }
 
+type Res = {
+    users: User[]
+}
+
 export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
 
     const token = useUserStatus(store => store.token)
@@ -23,10 +27,17 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
     const [confirmDelete, setConfirmDelete] = useState(false)
     const [deleteId, setDeleteId] = useState('')
     const [visibleUpdate, setVisibleUpdate] = useState(false)
-    const [selectedUser, setSelectedUser] = useState<User>()
+    const [selectedUser, setSelectedUser] = useState<User>({
+        id: "",
+        name: "",
+        lastname: "",
+        email: "",
+        role: ""
+    })
     const [modalMessage, setModalMessage] = useState<Message>()
     const [updateError, setUpdateError] = useState('')
     const [modal,setModal] = useState(false)
+    const usersData: Res = users?.data?.data
 
     const deleteUser = useMutation({
         mutationFn: (id: string) => { 
@@ -75,12 +86,13 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
 
     useEffect(() => {
         if(updateUser.data?.status === 200){
+            setModal(false)
             setVisibleUpdate(false)
             setVisible(true)
             setModal(true)
             setModalMessage({
-                title: 'Success',
-                message: 'The selected user was updated successfully'
+                title: 'Exito',
+                message: 'El usuario seleccionado ha sido actualizado'
             })
             users.refetch()
         }else{
@@ -94,22 +106,26 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
     }, [updateUser.isSuccess])
 
     useEffect(() => {
-        setModal(true)
-        setModalMessage({
-            title: 'Success',
-            message: 'The selected user was removed successfully'
-        })
-        users.refetch()
+        if(deleteUser.isSuccess === true){
+            setModal(false)
+            setModal(true)
+            setModalMessage({
+                title: 'Exito',
+                message: 'El usuario seleccionado ha sido removido'
+            })
+            users.refetch()
+        }
     }, [deleteUser.isSuccess])
 
     useEffect(() => {
+        setModal(false)
         setModal(true)
         setModalMessage({
-            title: 'An error has ocurred!',
-            message: 'Something went wrong, try again later'
+            title: 'A ocurrido un error!',
+            message: 'Algo ha ocurrido intenta mas tarde'
         })
     }, [deleteUser.isError])
-
+    
     if(users.isLoading) return <LoadingTable />
 
     if(users.isFetching || create.isFetching) return <LoadingTable />
@@ -126,7 +142,7 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
             <Alert className={`${visible === true ? 'fixed flex justify-between items-center top-3 left-[35%] z-[9999]' : 'hidden'}`} color={`${deleteUser.isSuccess || updateUser.isSuccess ? 'success' : 'failure'}`} onDismiss={() => { setModal(false) } }>
                 <div className="h-full flex items-center">
                     <Icon color={`${deleteUser.isSuccess || updateUser.isSuccess ? 'green':'red'}`} icon={InformationCircleIcon} />
-                    <span className="font-medium p-0">
+                    <span className="font-medium p-0 mr-2">
                         {modalMessage?.title}
                     </span>
                     {modalMessage?.message}
@@ -137,16 +153,16 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
             <Table className="h-full">
                 <TableHead>
                     <TableRow>
-                        <TableHeaderCell>Name</TableHeaderCell>
-                        <TableHeaderCell>Lastname</TableHeaderCell>
-                        <TableHeaderCell>Email</TableHeaderCell>
+                        <TableHeaderCell>Nombre</TableHeaderCell>
+                        <TableHeaderCell>Apellido</TableHeaderCell>
+                        <TableHeaderCell>Correo</TableHeaderCell>
                         <TableHeaderCell>Role</TableHeaderCell>
-                        <TableHeaderCell>Actions</TableHeaderCell>
+                        <TableHeaderCell>Acciones</TableHeaderCell>
                     </TableRow>
                 </TableHead>
                 <TableBody className="capitalize">
                     {
-                        users?.data?.data?.users?.map((user: User) => (
+                        usersData?.users?.map((user: User) => (
                             <TableRow key={user.id}>
                                 <TableCell>
                                     {user.name}

@@ -12,7 +12,7 @@ export const ProtectedRoute = ({ children }: Props) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(!isAuth) navigate('/login')
+        if(!isAuth) navigate('/')
     }, [isAuth])
 
     return children ? <>{children}</> : <Outlet />

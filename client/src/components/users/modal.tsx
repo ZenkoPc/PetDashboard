@@ -11,20 +11,20 @@ export const Modal = ({ close, submit, error }:{ close: () => void, submit: (e: 
                     </Button>
                 </div>
                 <Title className="text-xl">
-                    Register
+                    Registrar
                 </Title>
                 <form onSubmit={(e) => submit(e)}>
                     <Flex className="gap-7" flexDirection="col">
                         <Flex className="mt-5 w-full gap-4 flex-col md:flex-row">
                             <Flex flexDirection="col" alignItems="start">
                                 <Text>
-                                    Name:
+                                    Nombre:
                                 </Text>
                                 <TextInput name="named" required={true} type="text" placeholder="John" />
                             </Flex>
                             <Flex flexDirection="col" alignItems="start">
                                 <Text>
-                                    Lastname:
+                                    Apellido:
                                 </Text>
                                 <TextInput name="lastname" required={true} type="text" placeholder="Doe" />
                             </Flex>
@@ -32,13 +32,13 @@ export const Modal = ({ close, submit, error }:{ close: () => void, submit: (e: 
                         <Flex className="w-full gap-4 flex-col md:flex-row">
                             <Flex flexDirection="col" alignItems="start">
                                 <Text>
-                                    Email:
+                                    Correo:
                                 </Text>
                                 <TextInput name="email" type="email" placeholder="JohnDoe@gmail.com" />
                             </Flex>
                             <Flex flexDirection="col" alignItems="start">
                                 <Text>
-                                    Password:
+                                    Contraseña:
                                 </Text>
                                 <TextInput name="password" type="password" placeholder="***********" />
                             </Flex>
@@ -61,7 +61,7 @@ export const Modal = ({ close, submit, error }:{ close: () => void, submit: (e: 
                         {error}
                     </Text>
                     <Button type="submit" variant="primary" className="mt-8" iconPosition="right" icon={PaperAirplaneIcon}>
-                        Submit
+                        Enviar
                     </Button>
                 </form>
             </Card>

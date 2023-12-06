@@ -14,13 +14,13 @@ export const DeleteModal = ({ handleDelete, visible }:{ handleDelete: () => void
                     </div>
                     <ExclamationCircleIcon color="red" className="w-[200px] mx-auto" />
                     <Title className="text-xl">
-                        Are you sure to delete this user?
+                        ¿Estas seguro de eliminar este usuario?
                     </Title>
                     <Text color="red">
-                        This action is permanent and cannot be undone!
+                        Esta accion es permanente y no puede ser desecha!
                     </Text>
                     <Button onClick={handleDelete} variant="secondary" color="red" className="mt-4">
-                        Delete
+                        Eliminar
                     </Button>
                 </Card>
             </div>
