@@ -40,20 +40,20 @@ export const UpdateModal = ({ close, user, handleUpdate, error }: Props) => {
                         </Button>
                     </div>
                     <Title className="text-xl">
-                        Update User Data
+                        Actualizar
                     </Title>
                     <form onSubmit={handleSubmit}>
                         <Flex className="gap-7" flexDirection="col">
                             <Flex className="mt-5 w-full gap-4 flex-col md:flex-row">
                                 <Flex flexDirection="col" alignItems="start">
                                     <Text>
-                                        Name:
+                                        Nombre:
                                     </Text>
                                     <TextInput defaultValue={user?.name} name="named" required={true} type="text" placeholder="John" />
                                 </Flex>
                                 <Flex flexDirection="col" alignItems="start">
                                     <Text>
-                                        Lastname:
+                                        Apellido:
                                     </Text>
                                     <TextInput defaultValue={user?.lastname} name="lastname" required={true} type="text" placeholder="Doe" />
                                 </Flex>
@@ -61,13 +61,13 @@ export const UpdateModal = ({ close, user, handleUpdate, error }: Props) => {
                             <Flex className="w-full gap-4 flex-col md:flex-row">
                                 <Flex flexDirection="col" alignItems="start">
                                     <Text>
-                                        Email:
+                                        Correo:
                                     </Text>
                                     <TextInput defaultValue={user?.email} name="email" type="email" placeholder="JohnDoe@gmail.com" />
                                 </Flex>
                                 <Flex flexDirection="col" alignItems="start">
                                     <Text>
-                                        Password:
+                                        Contraseña:
                                     </Text>
                                     <TextInput defaultValue={user?.password} name="password" type="password" placeholder="***********" />
                                 </Flex>
@@ -90,7 +90,7 @@ export const UpdateModal = ({ close, user, handleUpdate, error }: Props) => {
                             {error}
                         </Text>
                         <Button type="submit" variant="primary" className="mt-8" iconPosition="right" icon={PaperAirplaneIcon}>
-                            Submit
+                            Enviar
                         </Button>
                     </form>
                 </Card>

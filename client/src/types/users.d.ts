@@ -20,3 +20,18 @@ export interface User {
     updatedAt?: string;
     password?: string
 }
+
+export interface Pet{
+    id: string
+    name: string
+    desc: string
+    raza: string
+    owner: string
+}
+
+interface ModalProps{
+    status: boolean
+    message: string
+    method: string
+    color: Color
+}

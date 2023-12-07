@@ -17,21 +17,15 @@ export const Login = () => {
 
         const data = await fetchLogin(username, password)
         
-        switch (data.status){
-            case 'auth:login:invalid' : {
-                setError(data?.message)
-                return
-            }
-            case 'validation:bad-request': {
+        if(data.status === 200){
+            setSession(data?.data?.data?.session?.token?.value, data?.data?.data?.user)
+            return
+        }else{
+            if(data?.errors){
                 setError(data?.errors[0])
                 return
-            }
-            case 'global:server-error': {
+            }else{
                 setError(data?.message)
-                return
-            }
-            case 200: {
-                setSession(data?.data?.data?.session?.token?.value, data?.data?.data?.user)
                 return
             }
         }
@@ -44,7 +38,7 @@ export const Login = () => {
                 Login
             </Metric>
             <Card className="flex flex-col justify-center items-center w-full md:h-[400px] md:w-[450px]">
-                <Title className="text-4xl mb-10 md:hidden">Login</Title>
+                <Title className="text-xl md:hidden">Login</Title>
                 <form onSubmit={handleSubmit} className="w-full h-full px-5 flex flex-col justify-between">
                     <Flex className="gap-2 mt-10 flex-col items-start">
                         <Title className="text-2xl mb-2">

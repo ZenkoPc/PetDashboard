@@ -12,7 +12,7 @@ export const LoginRoute = ({ children }: Props) => {
     const navigate = useNavigate()
     
     useEffect(() => {
-        if(isAuth) navigate('/')
+        if(isAuth) navigate('/dashboard')
     }, [isAuth])
 
     return children ? <>{children}</> : <Outlet />

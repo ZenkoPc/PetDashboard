@@ -1,7 +1,8 @@
-import { HomeIcon, Cog6ToothIcon, ServerIcon, CalendarDaysIcon } from "@heroicons/react/24/solid"
+import { HomeIcon, Cog6ToothIcon, CalendarDaysIcon, UsersIcon, UserIcon, UserGroupIcon } from "@heroicons/react/24/solid"
 import { Button, Card, Flex, Icon, Text } from "@tremor/react"
 import { Link } from "react-router-dom"
 import { useUserStatus } from "../store/useUserStatus"
+import { BarsArrowDownIcon } from "@heroicons/react/24/outline"
 
 export const Aside = () => {
 
@@ -9,30 +10,54 @@ export const Aside = () => {
 
     return (
         <aside className="h-screen lg:block min-w-[200px] hidden">
-                <Card className="h-full flex flex-col justify-between pt-2 px-0">
-                    <Flex alignItems="center" justifyContent="start" className="flex-col gap-5">
-                        <Link to={'/dashboard'} className="flex justify-start px-5 py-2 w-full items-center">
+                <Card style={{ borderRadius: '0px' }} className="h-full flex flex-col justify-between pt-2 px-0">
+                    <Flex alignItems="center" justifyContent="start" className="flex-col gap-5 [&>a]:flex [&>a]:justify-start [&>a]:px-5 [&>a]:py-2 [&>a]:w-full [&>a]:items-center">
+                        <Link to={'/dashboard'} >
                             <Icon icon={HomeIcon} />
                             <Text>
-                                Home
+                                Inicio
                             </Text>
                         </Link>
-                        <Link to={'/dashboard/dates'} className="flex justify-start px-5 py-2 w-full items-center">
+                        <Link to={'/dashboard/dates'} >
                             <Icon icon={CalendarDaysIcon} />
                             <Text>
-                                Appointments
+                                Citas
                             </Text>
                         </Link>
-                        {role === 'super_admin' && <Link to={'/dashboard/users'} className="flex justify-start px-5 py-2 w-full items-center">
-                            <Icon icon={ServerIcon} />
+                        <Link to={'/dashboard/razas'} >
+                            <Icon icon={UserIcon} />
                             <Text>
-                                Users
+                                Razas
+                            </Text>
+                        </Link>
+                        <Link to={'/dashboard/pets'} >
+                            <Icon icon={UserIcon} />
+                            <Text>
+                                Mascotas
+                            </Text>
+                        </Link>
+                        <Link to={'/dashboard/types'}>
+                            <Icon icon={BarsArrowDownIcon} />
+                            <Text>
+                                Tipos de mascotas
+                            </Text>
+                        </Link>
+                        <Link to={'/dashboard/owners'}>
+                            <Icon icon={UserGroupIcon} />
+                            <Text>
+                                Dueños
+                            </Text>
+                        </Link>
+                        {role === 'super_admin' && <Link to={'/dashboard/users'}>
+                            <Icon icon={UsersIcon} />
+                            <Text>
+                                Usuarios
                             </Text>
                         </Link>}
-                        <Link to={'/dashboard/settings'} className="flex justify-start px-5 py-2 w-full items-center">
+                        <Link to={'/dashboard/settings'}>
                             <Icon icon={Cog6ToothIcon} />
                             <Text>
-                                Settings
+                                Configuracion
                             </Text>
                         </Link>
                     </Flex>
