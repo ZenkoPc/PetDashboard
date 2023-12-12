@@ -26,6 +26,7 @@ export const PetHome = () => {
                     buttonAction={handleViewer} 
                 />
                 <TableShared 
+                    origin="pets"
                     tableHeaders={['Nombre','Raza','Dueño']} 
                     data={[]}
                 />

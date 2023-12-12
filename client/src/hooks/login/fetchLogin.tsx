@@ -1,4 +1,4 @@
-import { petAdmin } from "../api/petadmin"
+import { petAdmin } from "../../api/petadmin"
 
 const getLogin = async (email: string, password: string) => {
 

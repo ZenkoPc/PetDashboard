@@ -70,8 +70,8 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
         <>
             {modal.status && <BaseModal color={modal.color} method={modal.method} message={modal.message} close={handleClose} />}
             <div className="bg-black/20 transition-all fixed top-0 left-0 w-full h-full flex justify-center items-center z-[30000]">
-                <Card className="max-w-[450px] animate-fade-up">
-                    <form onChange={() => setModal(reset)} onSubmit={handleSubmit}>
+                <Card className="max-w-[600px] h-[500px] animate-fade-up py-4">
+                    <form className="h-full flex flex-col justify-between" onChange={() => setModal(reset)} onSubmit={handleSubmit}>
                         <Flex className="border-b pb-4">
                             <Title>
                                 {

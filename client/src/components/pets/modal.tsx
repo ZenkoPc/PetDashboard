@@ -102,7 +102,7 @@ export const ModalPet = ({ type, closeModal }: Props) => {
             {modal.status && <BaseModal color={modal.color} method={modal.method} message={modal.message} close={handleErrorClose} />}
             {ownerModal && <OwnersModal type="create" setData={handleNewOwner} close={handleCloseOwner} />}
             {razaModal && <RazaModal type="create" close={setRazaModal} setData={handleNewRaza} />}
-            <Card className="max-w-[500px] animate-fade-up">
+            <Card className="max-w-[600px] h-[500px] animate-fade-up">
                 <Title className="border-b pb-5 flex justify-between items-center">
                     {type === 'create' ? 'Crear una nueva Mascota' : 'Editar una mascota'}
                     <Button onClick={() => closeModal(false)} icon={XMarkIcon} variant="light" color="gray" />
@@ -114,7 +114,7 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                     </Text>
                     <TextInput icon={PencilIcon} required className="max-w-max" name="petName" />
                 </Flex>
-                <Flex className="mt-5 flex-col items-start md:items-center md:flex-row">
+                <Flex className="mt-5 flex-col" alignItems="start">
                     <Flex flexDirection="col" alignItems="start">
                         <Text>
                             Raza de la mascota: *
@@ -128,7 +128,7 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                                 setModal(reset)
                                 setRaza(e)
                             }} 
-                            className={`max-w-[50%] ${raza.length > 0 ? 'hidden' : 'block'}`}
+                            className={`max-w-[230px] ${raza.length > 0 ? 'hidden' : 'block'}`}
                         >
                             <TextInput onChange={(e) => handleChange(e, 'raza')} className="rounded-b-none" icon={MagnifyingGlassIcon} name="razaSearch" placeholder="labrador" />
                             {
@@ -149,9 +149,9 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                             </Flex>
                         </Select>
                     </Flex>
-                    <div className={`rounded-tremor-full md:justify-end w-full py-1 pr-4 ${raza.length < 1 ? 'hidden' : 'flex'}`}>
-                        <Flex className="gap-2 px-3 py-2 max-w-max rounded-tremor-full border-gray-400 border transition-all hover:bg-[] bg-[#F9FAFB]">
-                            <Text>
+                    <div className={`rounded-tremor-full max-w-[250px] w-full py-1 pr-4 ${raza.length < 1 ? 'hidden' : 'flex'}`}>
+                        <Flex className="gap-2 px-3 py-2 rounded-tremor-full border-gray-400 border transition-all hover:bg-[] bg-[#F9FAFB]">
+                            <Text className="capitalize">
                                 {raza}
                             </Text>
                             <Button 
@@ -165,7 +165,7 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                         </Flex>
                     </div>
                 </Flex>
-                <Flex className="mt-5 flex-col items-start md:items-center md:flex-row">
+                <Flex className="mt-5 flex-col" alignItems="start">
                     <Flex flexDirection="col" alignItems="start" className="md:max-w-[50%]">
                         <Text>
                             Dueño de la mascota: *
@@ -179,7 +179,7 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                                 setModal(reset)
                                 setDueno(e)
                             }} 
-                            className={`max-w-[50%] ${dueno.length > 0 ? 'hidden' : 'block'}`}
+                            className={`max-w-[230px] ${dueno.length > 0 ? 'hidden' : 'block'}`}
                         >
                             <TextInput onChange={(e) => handleChange(e, 'owner')} className="rounded-b-none" icon={MagnifyingGlassIcon} name="ownerSearch" placeholder="John doe - 112233" />
                             {
@@ -200,9 +200,9 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                             </Flex>
                         </Select>
                     </Flex>
-                    <div className={`rounded-tremor-full py-1 pr-4 ${dueno.length < 1 ? 'hidden' : 'block'}`}>
-                        <Flex className="gap-2 px-3 py-2 rounded-tremor-full border-gray-400 border transition-all hover:bg-[] bg-[#F9FAFB]">
-                            <Text>
+                    <div className={`rounded-tremor-full max-w-[250px] w-full py-1 pr-4 ${dueno.length < 1 ? 'hidden' : 'block'}`}>
+                        <Flex className="gap-2 px-3 py-2 w-full rounded-tremor-full border-gray-400 border transition-all hover:bg-[] bg-[#F9FAFB]">
+                            <Text className="capitalize">
                                 {dueno}
                             </Text>
                             <Button 

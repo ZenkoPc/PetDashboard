@@ -1,7 +1,7 @@
 import { LockClosedIcon, UserIcon } from "@heroicons/react/24/solid"
 import { Card, Title, Flex, Button, Metric, TextInput, Text } from "@tremor/react"
 import { useState } from "react"
-import { fetchLogin } from "../hooks/fetchLogin"
+import { fetchLogin } from "../hooks/login/fetchLogin"
 import { useUserStatus } from "../store/useUserStatus"
 
 export const Login = () => {

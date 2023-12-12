@@ -7,7 +7,8 @@ export interface APIRes {
 }
 
 export interface Data {
-    users: User[];
+    users?: User[];
+    petTypes?: PetType[]
 }
 
 export interface User {
@@ -21,6 +22,11 @@ export interface User {
     password?: string
 }
 
+export interface PetType{
+    id: string
+    name: string
+}
+
 export interface Pet{
     id: string
     name: string
@@ -29,9 +35,29 @@ export interface Pet{
     owner: string
 }
 
-interface ModalProps{
+export interface ModalProps{
     status: boolean
     message: string
     method: string
     color: Color
+}
+
+export interface ModalDeleteProps{
+    status: boolean
+    title: string
+    selectedId: string
+}
+
+export interface TableProps{
+    tableHeaders: string[]
+    data: PetType[] | undefined
+    origin: string
+    fetching: boolean
+    error: boolean
+}
+
+export interface ModalEditProps{
+    status: boolean
+    selectedId: string
+    selected: string
 }

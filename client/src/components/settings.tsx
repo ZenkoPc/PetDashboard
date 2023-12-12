@@ -12,19 +12,19 @@ export const Settings = () => {
             <LogoDashboard />
             <div className="px-5 w-full mt-5">
                 <Title>
-                    Settings
+                    Configuracion
                 </Title>
                 <Text className="mb-5">
-                    Personalize the dashboard as you wish.
+                    Personaliza el menu de la forma que desees.
                 </Text>
                 <Flex alignItems="start" className="border-t flex-col gap-5 py-5 w-full text-xl">
                     <Title>
-                        Change Theme :
+                        Cambiar tema :
                     </Title>
                     <Flex justifyContent="start" className="gap-4">
                         <Switch onChange={toggleTheme} />
                         <Text>
-                            Toggle Theme
+                            Cambiar
                         </Text>
                     </Flex>
                 </Flex>

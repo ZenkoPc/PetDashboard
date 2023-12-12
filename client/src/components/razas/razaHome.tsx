@@ -26,8 +26,11 @@ export const RazaHome = () => {
                     buttonAction={() => handleViewer(true)}                
                 />
                 <TableShared 
-                    tableHeaders={['Nombre','Tipo de mascota','Descripcion']} 
-                    data={[]}
+                    tableHeaders={['Nombre', 'Tipo de mascota', 'Descripcion']}
+                    data={[]} 
+                    origin={"pet-breed"} 
+                    fetching={false} 
+                    error={false}                
                 />
             </main>
         </>

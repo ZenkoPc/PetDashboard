@@ -12,7 +12,6 @@ interface Props{
 export const Header = ({ title, desc, buttonText, buttonAction }: Props) => {
     
     const role = useUserStatus(store => store.role)
-    console.log(role==='super_admin')
     return (
         <>
             <Flex className="mt-5 w-full" flexDirection="col" alignItems="start">

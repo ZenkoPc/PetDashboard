@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import { petAdmin } from "../api/petadmin"
-import { useUserStatus } from "../store/useUserStatus"
-import { APIRes } from "../types/users"
+import { petAdmin } from "../../api/petadmin"
+import { useUserStatus } from "../../store/useUserStatus"
+import { APIRes } from "../../types/users"
 
 const randomUsers = async ({ token }:{ token: string }) => {
 
