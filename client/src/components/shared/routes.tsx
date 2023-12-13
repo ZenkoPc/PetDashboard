@@ -71,7 +71,7 @@ export const RoutesMenu = ({ close }: Props) => {
                 </Link>
             </Flex>
             <Button onClick={closeSesion} color="red" variant="secondary" className="ml-3 max-w-max">
-                Close Session
+                Cerrar Sesion
             </Button>
         </>
     )

@@ -2,12 +2,13 @@ import { XMarkIcon, ExclamationCircleIcon } from "@heroicons/react/24/solid"
 import { Title, Card, Button, Text } from "@tremor/react"
 
 interface Props{
-    handleDelete: () => void
+    handleDelete: (id: string) => void
     close: () => void
     title: string
+    id: string
 }
 
-export const DeleteModal = ({ title, handleDelete, close }: Props) => {
+export const DeleteModal = ({ title, handleDelete, close, id }: Props) => {
     return(
         <>
              <div className="w-full h-full z-[10002] fixed top-0 left-0 flex justify-center items-center bg-black/80">
@@ -23,7 +24,7 @@ export const DeleteModal = ({ title, handleDelete, close }: Props) => {
                     <Text color="red">
                         Esta accion no puede ser desecha y es permanente
                     </Text>
-                    <Button onClick={handleDelete} variant="secondary" color="red" className="mt-4">
+                    <Button onClick={() => handleDelete(id)} variant="secondary" color="red" className="mt-4">
                         Eliminar
                     </Button>
                 </Card>

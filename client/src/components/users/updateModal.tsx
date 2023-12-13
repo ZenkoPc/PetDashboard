@@ -1,6 +1,6 @@
 import { XMarkIcon, PaperAirplaneIcon } from "@heroicons/react/24/solid"
 import { Title, Text, Flex, SelectItem, Card, Button, TextInput, Select } from "@tremor/react"
-import { User } from "../../types/users"
+import { User } from "../../types/types"
 
 interface Props {
     close: () => void,

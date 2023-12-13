@@ -4,8 +4,8 @@ import { Button, Card, Flex, Select, SelectItem, Text, TextInput, Textarea, Titl
 import { useState } from "react"
 import { PetTypeModal } from "../petTypes/modal"
 import { BaseModal } from "../shared/modal"
-import { ModalProps, PetType } from "../../types/users"
-import { UsePetTypes } from "../../hooks/petTypes/usePetTypes"
+import { ModalProps, PetType } from "../../types/types"
+import { usePetTypes } from "../../hooks/petTypes/usePetTypes"
 import { resetModal } from "../../helpers/resetData"
 
 interface Props{
@@ -21,7 +21,7 @@ export const RazaModal = ({ type, close, setData }: Props) => {
     const [typeVisible, setTypeVisible] = useState(false)
     const [modal, setModal] = useState<ModalProps>(resetModal)
 
-    const { pets, fetch, refetch }= UsePetTypes()
+    const { pets, fetch, refetch }= usePetTypes()
     const data: PetType[] = pets?.data?.petTypes
     const filteredArr = filter.length > 2
     ? data.filter((value) => value?.name?.includes(filter))

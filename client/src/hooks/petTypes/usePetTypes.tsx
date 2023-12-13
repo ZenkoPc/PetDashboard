@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { petAdminPetsInfo } from "../../api/petadmin"
-import { APIRes } from "../../types/users"
+import { APIRes } from "../../types/types"
 import { useUserStatus } from "../../store/useUserStatus"
 
 const getPets = async (token: string) => {
@@ -13,7 +13,7 @@ const getPets = async (token: string) => {
     return data
 }
 
-export const UsePetTypes = () => {
+export const usePetTypes = () => {
 
     const token = useUserStatus(store => store.token)
 

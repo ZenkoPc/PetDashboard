@@ -5,19 +5,19 @@ export const resetModal = {
     color: ''
 }
 
-export const resetDeleteModal = {
-    status: false,
-    title: '',
-    selectedId: '' 
-}
-
-export const resetTypeModal = {
+export const resetPetTypeModal = {
     status: false,
     type: ''
 }
 
-export const resetEditProps = {
+export const resetPetTypeEditProps = {
     status: false,
     selectedId: '',
     selected: ''
+}
+
+export const resetPetTypeDeleteModal = {
+    status: false,
+    title: '',
+    selectedId: '' 
 }

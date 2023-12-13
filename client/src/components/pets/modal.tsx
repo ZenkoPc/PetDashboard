@@ -1,7 +1,7 @@
 import { BookOpenIcon, ChevronRightIcon, MagnifyingGlassIcon, PaperAirplaneIcon, PencilIcon, UserIcon, XCircleIcon } from "@heroicons/react/24/outline"
 import { Button, Card, Flex, Select, SelectItem, Text, TextInput, Textarea, Title } from "@tremor/react"
 import { useState } from "react"
-import { ModalProps, Pet } from "../../types/users"
+import { ModalProps, Pet } from "../../types/types"
 import { XMarkIcon } from "@heroicons/react/24/solid"
 import { RazaModal } from "../razas/modal"
 import { BaseModal } from "../shared/modal"

@@ -1,7 +1,7 @@
 import { PencilIcon, PlusIcon } from "@heroicons/react/24/outline"
 import { Button, Flex, TextInput } from "@tremor/react"
 import { useEffect, useState } from "react"
-import { ModalProps } from "../../types/users"
+import { ModalProps } from "../../types/types"
 import { resetModal } from "../../helpers/resetData"
 import { useTypeCreate } from "../../hooks/petTypes/useTypeCreate"
 import { useQueryClient } from "@tanstack/react-query"

@@ -1,7 +1,7 @@
 import { AtSymbolIcon, HomeModernIcon, PaperAirplaneIcon, PencilIcon, PhoneIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { Button, Card, Col, Flex, Grid, Text, TextInput, Title } from "@tremor/react"
 import { useState } from "react"
-import { ModalProps } from "../../types/users"
+import { ModalProps } from "../../types/types"
 import { BaseModal } from "../shared/modal"
 
 interface Props{

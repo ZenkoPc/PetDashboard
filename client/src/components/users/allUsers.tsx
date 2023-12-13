@@ -1,6 +1,6 @@
 import { Button, Card, Icon, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from "@tremor/react"
 import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/solid"
-import { User } from "../../types/users"
+import { User } from "../../types/types"
 import { LoadingTable } from "./loadingTable"
 import { useUserStatus } from "../../store/useUserStatus"
 import { useMutation } from "@tanstack/react-query"
