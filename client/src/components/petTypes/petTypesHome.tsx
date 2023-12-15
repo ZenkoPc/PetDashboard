@@ -14,6 +14,7 @@ import { Origin } from "../../types/enum"
 import { useEditPetType } from "../../hooks/petTypes/useEditPetType"
 import { useDeletePetType } from "../../hooks/petTypes/useDeletePetType"
 import { DeleteModal } from "../shared/deleteModal"
+import { LoadingTable } from "../users/loadingTable"
 
 interface Props{
     pets: APIRes
@@ -25,77 +26,54 @@ export const PetTypesHome = () => {
 
     const queryClient = useQueryClient()
 
-    const { role } = useUserStatus()
+    const { role, token } = useUserStatus()
     const { pets, error, fetch }: Props = usePetTypes()
-
-    const handleNewType = useTypeCreate()
-    const handleEditType = useEditPetType()
-    const handleDeleteType = useDeletePetType()
 
     const [resModal, setResModal] = useState<ModalProps>(resetModal)
     const [createModal, setCreateModal] = useState(resetPetTypeModal)
     const [editModal, setEditModal] = useState<ModalPetTypeEditProps>(resetPetTypeEditProps)
     const [deleteModal, setDeleteModal] = useState<ModalDeleteProps>(resetPetTypeDeleteModal)
 
+    const setModal = (data: ModalProps) => {
+        setResModal(data)
+    }
+
+    const handleNewType = useTypeCreate(setModal)
+    const handleEditType = useEditPetType(setModal)
+    const handleDeleteType = useDeletePetType(setModal)
+
     const handleSubmitCreate = (name: string) => {
-        handleNewType.mutate(name)
+        handleNewType.mutate({ name, token})
     }
 
     const handleSubmitEdit = (name: string) => {
-        handleEditType.mutate({
-            id: editModal.selectedId,
-            name: name
-        })
+        handleEditType.mutate({ name, id: editModal.selectedId, token })
     }
 
     const handleSubmitDelete = (id: string) => {
-        handleDeleteType.mutate(id)
+        handleDeleteType.mutate({ id, token })
     }
 
     useEffect(() => {
-        if(handleNewType.isSuccess === true){
-            setResModal({
-                status: true,
-                method: handleNewType.data?.status === 200 ? 'Exito!' : 'Un error ha ocurrido!',
-                message: handleNewType.data?.status === 200 ? 'Tipo creado exitosamente' : handleNewType.data?.message,
-                color: handleNewType.data?.status === 200 ? 'green' : 'red'
-            })
-            if(handleNewType.data?.status === 200){
-                queryClient.invalidateQueries({ queryKey: ['petTypeList'] })
-                setCreateModal(resetPetTypeModal)
-            }
+        if(handleNewType.isSuccess){
+            setCreateModal(resetPetTypeModal)
+            queryClient.invalidateQueries({ queryKey: ['petTypeList'] })
         }
-    }, [handleNewType.isSuccess])
+    }, [handleNewType.isSuccess, queryClient])
 
     useEffect(() => {
-        if(handleEditType.isSuccess === true){
-            setResModal({
-                status: true,
-                method: handleEditType.data?.status === 200 ? 'Exito!' : 'Un error ha ocurrido!',
-                message: handleEditType.data?.status === 200 ? 'Tipo editado exitosamente' : handleEditType.data?.message,
-                color: handleEditType.data?.status === 200 ? 'green' : 'red'
-            })
-            if(handleEditType.data?.status === 200){
-                queryClient.invalidateQueries({ queryKey: ['petTypeList'] })
-                setEditModal(resetPetTypeEditProps)
-            }
+        if(handleEditType.isSuccess){
+            setEditModal(resetPetTypeEditProps)
+            queryClient.invalidateQueries({ queryKey: ['petTypeList'] })
         }
-    }, [handleEditType.isSuccess])
+    }, [handleEditType.isSuccess, queryClient])
 
     useEffect(() => {
         if(handleDeleteType.isSuccess === true){
-            setResModal({
-                status: true,
-                method: handleDeleteType.data?.status === 200 ? 'Exito!' : 'Un error ha ocurrido!',
-                message: handleDeleteType.data?.status === 200 ? 'Tipo eliminado exitosamente' : handleDeleteType.data?.message,
-                color: handleDeleteType.data?.status === 200 ? 'green' : 'red'
-            })
-            if(handleDeleteType.data?.status === 200){
-                queryClient.invalidateQueries({ queryKey: ['petTypeList'] })
-                setDeleteModal(resetPetTypeDeleteModal)
-            }
+            setDeleteModal(resetPetTypeDeleteModal)
+            queryClient.invalidateQueries({ queryKey: ['petTypeList'] })
         }
-    }, [handleDeleteType.isSuccess])
+    }, [handleDeleteType.isSuccess, queryClient])
 
     return(
         <>
@@ -118,7 +96,8 @@ export const PetTypesHome = () => {
                         type: 'create'
                     })}
                 />
-                <TableShared 
+                { handleNewType.isPending || handleEditType.isPending || handleDeleteType.isPending && <LoadingTable /> }
+                { !handleNewType.isPending && !handleEditType.isPending && !handleDeleteType.isPending && <TableShared 
                     error={error} 
                     fetching={fetch} 
                     tableHeaders={['Tipo de mascota']} 
@@ -134,7 +113,7 @@ export const PetTypesHome = () => {
                         title: '¿Estas Seguro de eliminar este tipo de mascota?'
                     })}
                     origin={Origin.PetType}
-                />
+                />}
             </main>
         </>
     )

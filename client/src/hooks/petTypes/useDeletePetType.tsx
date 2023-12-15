@@ -1,19 +1,27 @@
 import { useMutation } from "@tanstack/react-query"
-import { petAdminPetsInfo } from "../../api/petadmin"
-import { useUserStatus } from "../../store/useUserStatus"
+import { deletePetTypeMutation } from "../../api/requestPetTypes"
+import { ModalProps } from "../../types/types"
+import { AxiosError } from "axios"
 
-export const useDeletePetType = () => {
-
-    const token = useUserStatus(store => store.token)
+export const useDeletePetType = (modal: (data: ModalProps) => void) => {
 
     const deletePet = useMutation({
-        mutationFn: async (id: string) => {
-            return await petAdminPetsInfo.delete('/pet-type/'+id,
-                {
-                    headers: {
-                        "x-auth-token": `Bearer ${encodeURIComponent(token)}`
-                    }
-                }).catch(err => err.response.data)
+        mutationFn: deletePetTypeMutation,
+        onSuccess: () => {
+            modal({
+                status: true,
+                method: 'Exito!',
+                message: 'Tipo eliminado exitosamente',
+                color: 'green'
+            })
+        },
+        onError: (err: AxiosError) => {
+            modal({
+                status: true,
+                method: 'Un error ha ocurrido!',
+                message: err?.response?.data?.message,
+                color: 'red'
+            })
         }
     })
 

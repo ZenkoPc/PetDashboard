@@ -4,6 +4,7 @@ import { Header } from "../shared/header"
 import { TableShared } from "../shared/table"
 import { RazaModal } from "./modal"
 import { useUserStatus } from "../../store/useUserStatus"
+import { Origin } from "../../types/enum"
 
 export const RazaHome = () => {
 
@@ -28,9 +29,11 @@ export const RazaHome = () => {
                 <TableShared 
                     tableHeaders={['Nombre', 'Tipo de mascota', 'Descripcion']}
                     data={[]} 
-                    origin={"pet-breed"} 
+                    origin={Origin.Breed} 
                     fetching={false} 
-                    error={false}                
+                    error={false}        
+                    editFn={() => alert('edit')}
+                    deleteFn={() => alert('delete')}        
                 />
             </main>
         </>

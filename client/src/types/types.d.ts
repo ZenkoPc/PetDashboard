@@ -33,8 +33,24 @@ export interface Pet{
     id: string
     name: string
     desc: string
-    raza: string
-    owner: string
+    raza: Breed
+    owner: Owner
+}
+
+export interface Owner{
+    id: string
+    name: string
+    email: string
+    address: string
+    contact1: string
+    contact2: string
+}
+
+export interface Breed{
+    id: string
+    name: string
+    type: PetType
+    desc: string
 }
 
 export interface ModalProps{

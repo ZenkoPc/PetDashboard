@@ -4,6 +4,7 @@ import { Header } from "../shared/header"
 import { TableShared } from "../shared/table"
 import { OwnersModal } from "./modal"
 import { useUserStatus } from "../../store/useUserStatus"
+import { Origin } from "../../types/enum"
 
 export const OwnersHome = () => {
 
@@ -25,7 +26,15 @@ export const OwnersHome = () => {
                     buttonText={"Crear Dueño"} 
                     buttonAction={() => handleViewer(true)}
                 />
-                <TableShared tableHeaders={['Nombre','Correo','Direccion','Contacto']} data={[]} />
+                <TableShared 
+                    tableHeaders={['Nombre', 'Correo', 'Direccion', 'Contacto']}
+                    data={[]}
+                    origin={Origin.Owner}
+                    editFn={() => alert('edit')}
+                    deleteFn={() => alert('delete')} 
+                    fetching={false} 
+                    error={false}                
+                />
             </main>
         </>
     )

@@ -4,6 +4,7 @@ import { Header } from "../shared/header"
 import { TableShared } from "../shared/table"
 import { ModalPet } from "./modal"
 import { useUserStatus } from "../../store/useUserStatus"
+import { Origin } from "../../types/enum"
 
 export const PetHome = () => {
 
@@ -26,9 +27,13 @@ export const PetHome = () => {
                     buttonAction={handleViewer} 
                 />
                 <TableShared 
-                    origin="pets"
-                    tableHeaders={['Nombre','Raza','Dueño']} 
-                    data={[]}
+                    origin={Origin.Pet}
+                    tableHeaders={['Nombre', 'Raza', 'Dueño']}
+                    data={[]} 
+                    fetching={false} 
+                    error={false} 
+                    editFn={() => alert('edit')} 
+                    deleteFn={() => alert('delete')}                
                 />
             </main>
         </>

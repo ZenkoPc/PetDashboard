@@ -1,24 +1,28 @@
 import { useMutation } from "@tanstack/react-query"
-import { useUserStatus } from "../../store/useUserStatus"
-import { petAdminPetsInfo } from "../../api/petadmin"
+import { editPetTypeMutation } from "../../api/requestPetTypes"
+import { AxiosError } from "axios"
+import { ModalProps } from "../../types/types"
 
-interface Props{
-    id: string
-    name: string
-}
 
-export const useEditPetType = () => {
-    const token = useUserStatus(store => store.token)
+export const useEditPetType = (modal: (data: ModalProps) => void) => {
 
     const data = useMutation({
-        mutationFn: async ({ id, name }: Props) => {
-            return await petAdminPetsInfo.put(`/pet-type/${encodeURIComponent(id)}`,{
-                name: name
-            },{
-                headers: {
-                    "x-auth-token": "Bearer "+token
-                }
-            }).catch(err => err.response.data)
+        mutationFn: editPetTypeMutation,
+        onSuccess: () => {
+            modal({
+                status: true,
+                method: 'Exito!',
+                message: 'Tipo editado exitosamente',
+                color: 'green'
+            })
+        },
+        onError: (err: AxiosError) => {
+            modal({
+                status: true,
+                method: 'Un error ha ocurrido!',
+                message: err?.response?.data?.message,
+                color: 'red'
+            })
         }
     })
 

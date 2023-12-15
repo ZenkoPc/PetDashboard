@@ -1,17 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
-import { petAdminPetsInfo } from "../../api/petadmin"
-import { APIRes } from "../../types/types"
 import { useUserStatus } from "../../store/useUserStatus"
-
-const getPets = async (token: string) => {
-    const { data } = await petAdminPetsInfo.get<APIRes>('/pet-type',{
-        headers:{
-            "x-auth-token": 'Bearer '+token
-        }
-    }).catch(err => err.response.data)
-
-    return data
-}
+import { getPetTypes } from "../../api/requestPetTypes"
 
 export const usePetTypes = () => {
 
@@ -19,7 +8,7 @@ export const usePetTypes = () => {
 
     const data = useQuery({
         queryKey: ['petTypeList'],
-        queryFn: async () => await getPets(token)
+        queryFn: async () => await getPetTypes(token)
     })
 
     return {

@@ -1,20 +1,27 @@
 import { useMutation } from "@tanstack/react-query"
-import { petAdminPetsInfo } from "../../api/petadmin"
-import { useUserStatus } from "../../store/useUserStatus"
+import { ModalProps } from "../../types/types"
+import { createPetTypeMutation } from "../../api/requestPetTypes"
+import { AxiosError } from "axios"
 
-export const useTypeCreate = () => {
-
-    const token = useUserStatus(store => store.token)
+export const useTypeCreate = (modal: (data: ModalProps) => void) => {
 
     const data = useMutation({
-        mutationFn: async (name: string) => {
-            return await petAdminPetsInfo.post('/pet-type',{
-                name
-            },{
-                headers: {
-                    "x-auth-token": 'Bearer '+token
-                }
-            }).catch(err => err.response.data)
+        mutationFn: createPetTypeMutation,
+        onSuccess: () => {
+            modal({
+                status: true,
+                method: 'Exito!',
+                message: 'Tipo creado exitosamente',
+                color: 'green'
+            })
+        },
+        onError: (err: AxiosError) => {
+            modal({
+                status: true,
+                method: 'Un error ha ocurrido!',
+                message: err?.response?.data?.message,
+                color: 'red'
+            })
         }
     })
 
