@@ -1,5 +1,6 @@
 import { XMarkIcon, ExclamationCircleIcon } from "@heroicons/react/24/solid"
 import { Title, Card, Button, Text } from "@tremor/react"
+import { useTranslation } from "react-i18next"
 
 interface Props{
     handleDelete: (id: string) => void
@@ -9,6 +10,9 @@ interface Props{
 }
 
 export const DeleteModal = ({ title, handleDelete, close, id }: Props) => {
+    
+    const { t } = useTranslation()
+
     return(
         <>
              <div className="w-full h-full z-[10002] fixed top-0 left-0 flex justify-center items-center bg-black/80">
@@ -22,10 +26,10 @@ export const DeleteModal = ({ title, handleDelete, close, id }: Props) => {
                         {title}
                     </Title>
                     <Text color="red">
-                        Esta accion no puede ser desecha y es permanente
+                        {t('deleteModalMessage')}
                     </Text>
-                    <Button onClick={() => handleDelete(id)} variant="secondary" color="red" className="mt-4">
-                        Eliminar
+                    <Button onClick={() => handleDelete(id)} variant="secondary" color="red" className="mt-4 capitalize">
+                        {t('deleteModalAction')}
                     </Button>
                 </Card>
             </div>

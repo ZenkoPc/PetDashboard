@@ -3,11 +3,13 @@ import { Card, Title, Flex, Button, Metric, TextInput, Text } from "@tremor/reac
 import { useState } from "react"
 import { fetchLogin } from "../hooks/login/fetchLogin"
 import { useUserStatus } from "../store/useUserStatus"
+import { useTranslation } from "react-i18next"
 
 export const Login = () => {
 
     const [error, setError] = useState('')
     const setSession = useUserStatus(store => store.setSession)
+    const { t } = useTranslation()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -35,22 +37,22 @@ export const Login = () => {
     return (
         <main className="flex flex-col items-center justify-center w-full h-screen">
             <Metric className="mb-5 text-6xl hidden md:block">
-                Login
+                {t('login')}
             </Metric>
             <Card className="flex flex-col justify-center items-center w-full md:h-[400px] md:w-[450px]">
                 <Title className="text-xl md:hidden">Login</Title>
                 <form onSubmit={handleSubmit} className="w-full h-full px-5 flex flex-col justify-between">
                     <Flex className="gap-2 mt-10 flex-col items-start">
-                        <Title className="text-2xl mb-2">
-                            Email:
+                        <Title className="text-2xl mb-2 capitalize">
+                            {t('loginUser')}
                         </Title>
                         <TextInput
                         onChange={() => setError('')}
                             name="username" icon={UserIcon} 
                             placeholder="JohnDoe123" 
                         />
-                        <Title className="mt-3 text-2xl mb-2">
-                            Password:
+                        <Title className="mt-3 text-2xl mb-2 capitalize">
+                            {t('loginPass')}
                         </Title>
                         <TextInput 
                         onChange={() => setError('')}
@@ -64,7 +66,7 @@ export const Login = () => {
                     </Flex>
                     <Flex justifyContent="end" className="border-t w-full space-x-2 pt-4">
                         <Button type="submit">
-                            Iniciar Sesion
+                            {t('loginAction')}
                         </Button>
                     </Flex>
                 </form>

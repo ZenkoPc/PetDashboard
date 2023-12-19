@@ -19,7 +19,7 @@ export const getPetTypes = async (token: string) => {
 
     const { data } = await petAdminPetsInfo.get<APIRes>('/pet-type',{
         headers:{
-            "x-auth-token": 'Bearer '+token
+            "x-auth-token": `Bearer ${encodeURIComponent(token)}`
         }
     }).catch(err => err.response.data)
 

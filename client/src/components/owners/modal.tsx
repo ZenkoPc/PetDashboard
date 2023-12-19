@@ -3,6 +3,8 @@ import { Button, Card, Col, Flex, Grid, Text, TextInput, Title } from "@tremor/r
 import { useState } from "react"
 import { ModalProps } from "../../types/types"
 import { BaseModal } from "../shared/modal"
+import { resetModal } from "../../helpers/resetData"
+import { useTranslation } from "react-i18next"
 
 interface Props{
     type: string
@@ -12,19 +14,8 @@ interface Props{
 
 export const OwnersModal = ({ type, close, setData }: Props) => {
 
-    const [modal, setModal] = useState<ModalProps>({
-        status: false,
-        method: '',
-        message: '',
-        color: 'red'
-    })
-
-    const reset = {
-        status: false,
-        method: '',
-        message: '',
-        color: 'red'
-    }
+    const [modal, setModal] = useState<ModalProps>(resetModal)
+    const { t } = useTranslation()
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -35,7 +26,7 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
         const email = e.currentTarget.ownerEmail.value
         const address = e.currentTarget.ownerAddress.value
 
-        if(name && contact1 && contact2 && email && address && setData){
+        if(name && contact1 && email && address && setData){
             setData({
                 name: name.split(" ")[0],
                 contact: contact1
@@ -43,8 +34,7 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
             close(true)
         }
 
-        if(name && contact1 && contact2 && email && address){
-            console.log(name, contact1, contact2, email, address)
+        if(name && contact1 && email && address){
             setModal({
                 status: true,
                 method: 'Un error ha ocurrido!',
@@ -63,7 +53,7 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
     }
 
     const handleClose = () => {
-        setModal(reset)
+        setModal(resetModal)
     }
 
     return(
@@ -71,20 +61,19 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
             {modal.status && <BaseModal color={modal.color} method={modal.method} message={modal.message} close={handleClose} />}
             <div className="bg-black/20 transition-all fixed top-0 left-0 w-full h-full flex justify-center items-center z-[30000]">
                 <Card className="max-w-[600px] h-[500px] animate-fade-up py-4">
-                    <form className="h-full flex flex-col justify-between" onChange={() => setModal(reset)} onSubmit={handleSubmit}>
+                    <form className="h-full flex flex-col justify-between" onChange={() => setModal(resetModal)} onSubmit={handleSubmit}>
                         <Flex className="border-b pb-4">
-                            <Title>
+                            <Title className="capitalize">
                                 {
-                                    type === 'create' ? 'Crear Nuevo'+" " : 'Editar'+" "
+                                    type === 'create' ? t('ownersCreateModal') : t('ownersEditModal')
                                 }
-                                Dueño
                             </Title>
                             <Button type="button" variant="light" color="gray" icon={XMarkIcon} onClick={() => close(false)} />
                         </Flex>
                         <Flex className="mt-4 gap-3" flexDirection="col">
                             <Flex flexDirection="col" alignItems="start">
-                                <Text>
-                                    Nombre Completo: *
+                                <Text className="capitalize">
+                                    {t('ownersModalHeaders.0')}: *
                                 </Text>
                                 <TextInput icon={UserIcon} name="ownerName" className="max-w-max" />
                             </Flex>
@@ -92,16 +81,16 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
                                 <Grid numItems={1} numItemsMd={2} className="gap-3">
                                     <Col>
                                         <Flex flexDirection="col" alignItems="start">
-                                            <Text>
-                                                # de Contacto 1 *
+                                            <Text className="capitalize">
+                                                {t('ownersModalHeaders.1')} *
                                             </Text>
                                             <TextInput icon={PhoneIcon} name="ownerContact1" />
                                         </Flex>
                                     </Col>
                                     <Col>
                                         <Flex flexDirection="col" alignItems="start">
-                                            <Text>
-                                                # de Contacto 2 *
+                                            <Text className="capitalize">
+                                                {t('ownersModalHeaders.2')}
                                             </Text>
                                             <TextInput icon={PhoneIcon} name="ownerContact2" />
                                         </Flex>
@@ -109,22 +98,22 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
                                 </Grid>
                             </Flex>
                             <Flex flexDirection="col" alignItems="start">
-                                <Text>
-                                    Correo: *
+                                <Text className="capitalize">
+                                    {t('ownersModalHeaders.3')} *
                                 </Text>
                                 <TextInput icon={AtSymbolIcon} name="ownerEmail" className="max-w-max"/>
                             </Flex>
                             <Flex flexDirection="col" alignItems="start">
-                                <Text>
-                                    Direccion: *
+                                <Text className="capitalize">
+                                    {t('ownersModalHeaders.4')}: *
                                 </Text>
                                 <TextInput icon={HomeModernIcon} name="ownerAddress" className="max-w-[300px]" />
                             </Flex>
                         </Flex>
                         <Flex justifyContent="end" className="border-t mt-5 pt-4">
-                            <Button type="submit" iconPosition="right" icon={type === 'create' ? PaperAirplaneIcon : PencilIcon}>
+                            <Button className="capitalize" type="submit" iconPosition="right" icon={type === 'create' ? PaperAirplaneIcon : PencilIcon}>
                                 {
-                                    type === 'create' ? 'Crear' : 'Editar'
+                                    type === 'create' ? t('ownersCreateSendAction') : t('ownersEditSendAction')
                                 }
                             </Button>
                         </Flex>

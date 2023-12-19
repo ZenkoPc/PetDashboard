@@ -1,0 +1,133 @@
+{
+    "breeds": "Breeds",
+    "breedsDesc": "Manage all the breeds from this module",
+    "breedsDescViewer": "Visualize all the breeds from this module",
+    "breedsCreate": "Create breed",
+    "breedsTableHeaders": [
+        "name","pet type","description"
+    ],
+    "breedsModalTitleCreate": "Create new breed",
+    "breedsModalTitleEdit": "Edit breed",
+    "breedsModalName": "name",
+    "breedsModalType": "pet type",
+    "breedsModalDesc": "description",
+    "breedsModalActionCreate": "create",
+    "breedsModalActionEdit": "edit",
+    "breedsModalTypePlaceholder": "Dog",
+    "breedsModalNoTypes": "There is no types for your search, you can add a new one doing clic on the button below",
+    "breedsModalCreateTypeAction": "create",
+
+    "pets": "Pets",
+    "petsDesc": "Manage the pets from this module as you want",
+    "petsDescViewer": "See all the pets from this module",
+    "petsCreate": "New Pet",
+    "petsTableHeaders": [
+        "name","breed","owner"
+    ],
+    "petsModalName": "pet´s name",
+    "petsModalBreed": "pet´s breed",
+    "petsModalOwner": "pet´s owner",
+    "petsModalDesc": "characteristics",
+    "petsModalTitleCreate": "create new pet",
+    "petsModalTitleEdit": "edit pet",
+    "petsModalActionCreate": "create",
+    "petsModalActionEdit": "edit",
+    "petsModalNoOwners": "There is no owners for your search, you can create a new one doing click on the button below",
+    "petsModalNoBreeds": "There is no breeds for your search, you can create a new one doing click on the button below",
+    "petsModalOwnersCreate": "Create new",
+    "petsModalBreedsCreate": "Create new",
+
+    "petTypes": "Pet Types",
+    "petTypesDesc": "Manage all the registered pet types from this module",
+    "petTypesCreate": "New pet type",
+    "petTypesDescViewer": "Visualize all the pet types from this module",
+    "petTypesTableHeaders": ["Pet type"],
+    "petTypesDeleteTitle": "Are you sure to delete this pet type?",
+    "petTypesCreateTitle": "Create new pet type",
+    "petTypesEditTitle": "Edit pet type",
+    "petTypesCreateAction": "Create",
+    "petTypesEditAction": "Edit",
+    "petTypesModalHeaders": "name",
+    "petTypesPlaceholder": "Dog",
+    "petTypesSuccess": "Success!",
+    "petTypesFailed": "An Error has ocurred!",
+    "petTypesSuccessDelete": "The pet type was deleted successfully",
+    "petTypesSuccessEdit": "The pet type was updated successfully",
+    "petTypesSuccessCreate": "The pet type was created successfully",
+
+    "owners": "Owners",
+    "ownersDesc": "Manage the owners/clients from this section",
+    "ownersDescViewer": "See all the owners/clients from this section",
+    "ownersCreate": "Create owners",
+    "ownersTableHeaders": [
+        "name","email","address","cellphone"
+    ],
+    "ownersActions": "Actions",
+    "ownersCreateModal": "Create new owner",
+    "ownersEditModal": "Edit owner",
+    "ownersModalHeaders": [
+        "full name","cellphone 1","cellphone 2","email","address"
+    ],
+    "ownersCreateSendAction": "Create",
+    "ownersEditSendAction": "Edit",
+
+    "users": "Users",
+    "usersDesc": "Manage all the users from this module",
+    "usersCreateButton": "New User",
+    "usersTab": "All Users",
+    "usersHeaders": [
+        "Name","Lastname","email","Role","Actions"
+    ],
+    "usersRegister": "Register User",
+    "usersEdit": "Edit User",
+    "usersEditHeaders": [
+        "Name","lastname","email","password","role"
+    ],
+    "usersAction": "Send",
+    "usersSuccess": "Success!",
+    "usersSuccessCreateMessage": "The user was created successfully",
+    "usersFailed": "Error!",
+    "usersFailedMessage": "An error ocurred",
+    "usersDelete": "Are you sure to delete this user?",
+    "usersDeleteDesc": "this action is permanent and cannot be undone!",
+    "usersDeleteAction": "delete",
+    "usersEditMessage": "The user was edited successfully",
+    "usersDeleteMessage": "The user was removed successfully",
+
+    "settings": "Settings",
+    "settingsDesc": "Change the dashboard settings the way you want",
+    "settingsTheme": "Change theme",
+    "settingsThemeChangeDark": "Change to Dark Theme",
+    "settingsThemeChangeLight": "Change to Light Theme",
+    "settingsChangeLanguage": "Change Language",
+    "language": "English",
+    "language2": "Spanish",
+
+    "deleteModalMessage": "This action is permanent and cannot be undone",
+    "deleteModalAction": "delete",
+
+    "routesHome": "Home",
+    "routesDates": "Appointments",
+    "routesBreeds": "Breeds",
+    "routesPets": "Pets",
+    "routesPetTypes": "Pet Types",
+    "routesOwners": "Owners",
+    "routesUsers": "Users",
+    "routesSettings": "Settings",
+    "routesClose": "Close session",
+
+    "noTableData": "There is no data to show",
+    "noResultsData": "There is no results to your search",
+    "showResults": "Show",
+    "greetings": "Hi",
+
+    "404Title": "Oops an error has ocurred",
+    "404Message": "The page does not exist, go back to index",
+    "404Action": "Go back",
+
+    "login": "Login",
+    "loginUser": "Email:",
+    "loginPass": "Password:",
+    "loginAction": "Sign in"
+
+}

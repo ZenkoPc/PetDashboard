@@ -5,11 +5,13 @@ import { TableShared } from "../shared/table"
 import { ModalPet } from "./modal"
 import { useUserStatus } from "../../store/useUserStatus"
 import { Origin } from "../../types/enum"
+import { useTranslation } from "react-i18next"
 
 export const PetHome = () => {
 
     const [modal, setCreateModal] = useState(false)
     const role = useUserStatus(store => store.role)
+    const { t } = useTranslation()
 
     const handleViewer = (value: boolean) => {
         setCreateModal(value)
@@ -21,14 +23,14 @@ export const PetHome = () => {
             <main className="h-screen max-h-screen overflow-y-scroll [&>*]:px-5 pb-10 w-full">
                 <LogoDashboard />
                 <Header 
-                    title={"Mascotas"} 
-                    desc={role !== 'viewer' ? "Administra a todas las mascotas desde este modulo" : "Visualiza las mascotas registradas desde este modulo"} 
-                    buttonText={"Crear Mascota"} 
+                    title={t('pets')} 
+                    desc={role !== 'viewer' ? t('petsDesc') : t('petsDescViewer')} 
+                    buttonText={t('petsCreate')} 
                     buttonAction={handleViewer} 
                 />
                 <TableShared 
                     origin={Origin.Pet}
-                    tableHeaders={['Nombre', 'Raza', 'Dueño']}
+                    tableHeaders={t('petsTableHeaders',{ returnObjects: true })}
                     data={[]} 
                     fetching={false} 
                     error={false} 

@@ -3,6 +3,7 @@ import { Button, Flex, Icon, Text, Title } from "@tremor/react"
 import { Link } from "react-router-dom"
 import { useUserStatus } from "../../store/useUserStatus"
 import { XMarkIcon } from "@heroicons/react/24/outline"
+import { useTranslation } from "react-i18next"
 
 interface Props{
     close?: () => void
@@ -11,6 +12,7 @@ interface Props{
 export const RoutesMenu = ({ close }: Props) => {
 
     const { role, closeSesion } = useUserStatus()
+    const { t } = useTranslation()
 
     return(
         <>
@@ -24,54 +26,54 @@ export const RoutesMenu = ({ close }: Props) => {
                 <Link to={'/dashboard'} >
                     <Icon icon={HomeIcon} />
                     <Text>
-                        Inicio
+                        {t('routesHome')}
                     </Text>
                 </Link>
                 <Link to={'/dashboard/dates'} >
                     <Icon icon={CalendarDaysIcon} />
                     <Text>
-                        Citas
+                        {t('routesDates')}
                     </Text>
                 </Link>
                 <Link to={'/dashboard/razas'} >
                     <Icon icon={UserIcon} />
                     <Text>
-                        Razas
+                        {t('routesBreeds')}
                     </Text>
                 </Link>
                 <Link to={'/dashboard/pets'} >
                     <Icon icon={UserIcon} />
                     <Text>
-                        Mascotas
+                        {t('routesPets')}
                     </Text>
                 </Link>
                 <Link to={'/dashboard/types'}>
                     <Icon icon={BarsArrowDownIcon} />
                     <Text>
-                        Tipos de mascotas
+                        {t('routesPetTypes')}
                     </Text>
                 </Link>
                 <Link to={'/dashboard/owners'}>
                     <Icon icon={UserGroupIcon} />
                     <Text>
-                        Dueños
+                        {t('routesOwners')}
                     </Text>
                 </Link>
                 {role === 'super_admin' && <Link to={'/dashboard/users'}>
                     <Icon icon={UsersIcon} />
                     <Text>
-                        Usuarios
+                        {t('routesUsers')}
                     </Text>
                 </Link>}
                 <Link to={'/dashboard/settings'}>
                     <Icon icon={Cog6ToothIcon} />
                     <Text>
-                        Configuracion
+                        {t('routesSettings')}
                     </Text>
                 </Link>
             </Flex>
             <Button onClick={closeSesion} color="red" variant="secondary" className="ml-3 max-w-max">
-                Cerrar Sesion
+                {t('routesClose')}
             </Button>
         </>
     )

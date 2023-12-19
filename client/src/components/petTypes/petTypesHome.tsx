@@ -15,6 +15,7 @@ import { useEditPetType } from "../../hooks/petTypes/useEditPetType"
 import { useDeletePetType } from "../../hooks/petTypes/useDeletePetType"
 import { DeleteModal } from "../shared/deleteModal"
 import { LoadingTable } from "../users/loadingTable"
+import { useTranslation } from "react-i18next"
 
 interface Props{
     pets: APIRes
@@ -28,6 +29,7 @@ export const PetTypesHome = () => {
 
     const { role, token } = useUserStatus()
     const { pets, error, fetch }: Props = usePetTypes()
+    const { t } = useTranslation()
 
     const [resModal, setResModal] = useState<ModalProps>(resetModal)
     const [createModal, setCreateModal] = useState(resetPetTypeModal)
@@ -85,12 +87,12 @@ export const PetTypesHome = () => {
             <main className="h-screen max-h-screen overflow-y-scroll [&>*]:px-5 pb-10 w-full">
                 <LogoDashboard />
                 <Header 
-                    title={"Tipos de mascostas"} 
+                    title={t('petTypes')} 
                     desc={role !== 'viewer' 
-                        ? "Administra todos los tipos de mascotas registrados desde este modulo" 
-                        : "Visualiza todos los tipos de mascotas desde este modulo"
+                        ? t('petTypesDesc') 
+                        : t('petTypesDescViewer')
                     } 
-                    buttonText={"Crear nuevo tipo"} 
+                    buttonText={t('petTypesCreate')} 
                     buttonAction={() => setCreateModal({
                         status: true,
                         type: 'create'
@@ -100,7 +102,7 @@ export const PetTypesHome = () => {
                 { !handleNewType.isPending && !handleEditType.isPending && !handleDeleteType.isPending && <TableShared 
                     error={error} 
                     fetching={fetch} 
-                    tableHeaders={['Tipo de mascota']} 
+                    tableHeaders={t('petTypesTableHeaders',{ returnObjects: true })} 
                     data={pets?.data?.petTypes}
                     editFn={({ id, name }: PetType) => setEditModal({
                         status: true,
@@ -110,7 +112,7 @@ export const PetTypesHome = () => {
                     deleteFn={(id: string) => setDeleteModal({
                         status: true,
                         selectedId: id,
-                        title: '¿Estas Seguro de eliminar este tipo de mascota?'
+                        title: t('petTypesDeleteTitle')
                     })}
                     origin={Origin.PetType}
                 />}

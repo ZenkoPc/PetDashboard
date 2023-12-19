@@ -10,6 +10,7 @@ import { Alert } from "flowbite-react"
 import { DeleteModal } from "./deleteModal"
 import { PencilIcon } from "@heroicons/react/24/outline"
 import { UpdateModal } from "./updateModal"
+import { t } from "i18next"
 
 type Message = {
     title?: string,
@@ -91,8 +92,8 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
             setVisible(true)
             setModal(true)
             setModalMessage({
-                title: 'Exito',
-                message: 'El usuario seleccionado ha sido actualizado'
+                title: `${t('usersSuccess')}`,
+                message: `${t('usersEditMessage')}`
             })
             users.refetch()
         }else{
@@ -110,8 +111,8 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
             setModal(false)
             setModal(true)
             setModalMessage({
-                title: 'Exito',
-                message: 'El usuario seleccionado ha sido removido'
+                title: `${t('usersSuccess')}`,
+                message: `${t('usersDeleteMessage')}`
             })
             users.refetch()
         }
@@ -121,8 +122,8 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
         setModal(false)
         setModal(true)
         setModalMessage({
-            title: 'A ocurrido un error!',
-            message: 'Algo ha ocurrido intenta mas tarde'
+            title: `${t('usersFailed')}`,
+            message: `${t('usersFailedMessage')}`
         })
     }, [deleteUser.isError])
     
@@ -152,12 +153,22 @@ export const AllUsers = ({ users, create }:{ users: any, create: any }) => {
         <Card className="">
             <Table className="h-full">
                 <TableHead>
-                    <TableRow>
-                        <TableHeaderCell>Nombre</TableHeaderCell>
-                        <TableHeaderCell>Apellido</TableHeaderCell>
-                        <TableHeaderCell>Correo</TableHeaderCell>
-                        <TableHeaderCell>Role</TableHeaderCell>
-                        <TableHeaderCell>Acciones</TableHeaderCell>
+                    <TableRow className="[&>th]:capitalize">
+                        <TableHeaderCell>
+                            {t('usersHeaders.0')}
+                        </TableHeaderCell>
+                        <TableHeaderCell>
+                            {t('usersHeaders.1')}
+                        </TableHeaderCell>
+                        <TableHeaderCell>
+                            {t('usersHeaders.2')}
+                        </TableHeaderCell>
+                        <TableHeaderCell>
+                            {t('usersHeaders.3')}
+                        </TableHeaderCell>
+                        <TableHeaderCell>
+                            {t('usersHeaders.4')}
+                        </TableHeaderCell>
                     </TableRow>
                 </TableHead>
                 <TableBody className="capitalize">

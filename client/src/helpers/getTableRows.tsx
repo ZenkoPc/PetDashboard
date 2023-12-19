@@ -36,7 +36,11 @@ export const GetTableRows = ({ data, origin, headersLength, editFn, deleteFn }: 
                         </TableRow>
                     ))
                     : ''
-                : <NoResultsData />
+                : <TableRow>
+                    <TableCell>
+                        <NoResultsData />
+                    </TableCell>
+                </TableRow>
             }
         </>
     )

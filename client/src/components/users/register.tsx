@@ -10,6 +10,7 @@ import { petAdmin } from "../../api/petadmin"
 import { useUserStatus } from "../../store/useUserStatus"
 import { Alert } from "flowbite-react"
 import { UserPlusIcon } from "@heroicons/react/24/outline"
+import { useTranslation } from "react-i18next"
 
 interface newUser {
     name: string
@@ -19,8 +20,6 @@ interface newUser {
     role: string
 }
 
-
-
 export const Register = () => {
 
     const [modal, setModal] = useState(false)
@@ -28,6 +27,7 @@ export const Register = () => {
     const token = useUserStatus(store => store.token)
     const [error, setError] = useState('')
     const [visible, setVisible] = useState(false)
+    const { t } = useTranslation()
 
     const createUser = useMutation({
         mutationFn: async (users: newUser) => {
@@ -97,22 +97,22 @@ export const Register = () => {
                 <Flex alignItems="center" className="mt-5 gap-4 items-start md:items-center flex-col md:flex-row">
                     <div>
                         <Title className="">
-                            Usuarios
+                            {t('users')}
                         </Title>
                         <Text>
-                            Administra a todos los usuarios desde este modulo, añade, modifica o elimina a los usuarios segun tu desees.
+                            {t('usersDesc')}
                         </Text>
                     </div>
                     <div>
                         <Button onClick={() => setModal(true)} className="p-3 rounded-tremor-full" size="xl" icon={UserPlusIcon}>
-                            Nuevo Usuario
+                            {t('usersCreateButton')}
                         </Button>
                     </div>
                 </Flex>
                 <TabGroup className="mt-5">
                     <TabList>
                         <Tab>
-                            Todos los usuarios
+                            {t('usersTab')}
                         </Tab>
                     </TabList>
                     <TabPanels className="mt-5">
@@ -127,9 +127,9 @@ export const Register = () => {
                     <div className="h-full flex items-center">
                         <Icon color="red" icon={InformationCircleIcon} />
                         <span className="font-medium p-0">
-                            A ocurrido un error!
+                            {t('usersFailed')}
                         </span>
-                        Algo ha fallado, intenta mas tarde
+                        {t('usersFailedMessage')}
                     </div>
                 </Alert>
             }
@@ -138,9 +138,9 @@ export const Register = () => {
                     <div className="h-full flex items-center">
                         <Icon color="green" icon={InformationCircleIcon} />
                         <span className="font-medium">
-                            Exito!
+                            {t('usersSuccess')}
                         </span>
-                        El usuario fue creado exitosamente
+                        {t('usersSuccessCreateMessage')}
                     </div>
                 </Alert>
             }

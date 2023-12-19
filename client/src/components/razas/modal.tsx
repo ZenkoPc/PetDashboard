@@ -7,6 +7,7 @@ import { BaseModal } from "../shared/modal"
 import { ModalProps, PetType } from "../../types/types"
 import { usePetTypes } from "../../hooks/petTypes/usePetTypes"
 import { resetModal } from "../../helpers/resetData"
+import { useTranslation } from "react-i18next"
 
 interface Props{
     type: string
@@ -20,6 +21,7 @@ export const RazaModal = ({ type, close, setData }: Props) => {
     const [filter, setFilter] = useState('')
     const [typeVisible, setTypeVisible] = useState(false)
     const [modal, setModal] = useState<ModalProps>(resetModal)
+    const { t } = useTranslation()
 
     const { pets, fetch, refetch }= usePetTypes()
     const data: PetType[] = pets?.data?.petTypes
@@ -77,32 +79,29 @@ export const RazaModal = ({ type, close, setData }: Props) => {
             <div className="fixed top-0 left-0 w-full h-full bg-black/30 flex justify-center items-center z-[30000]">
                 <Card className="max-w-[600px] h-[500px] animate-fade-up">
                     <form onChange={() => 
-                        setModal({status: false,
-                            message: '',
-                            method: '',
-                            color: 'red'
-                        })} 
+                        setModal(resetModal)} 
                         onSubmit={handleSubmit}
                         className="flex flex-col justify-between h-full"
                     >
                         <Flex flexDirection="col" alignItems="start">
                             <Title className="flex w-full border-b pb-4 justify-between items-center">
-                                {type === 'create' ? 'Crear nueva raza' : 'Editar raza'}
+                                {type === 'create' ? t('breedsModalTitleCreate') : t('breedsModalTitleEdit')}
                                 <Button type="button" onClick={() => close(false)} variant="light" color="gray" icon={XMarkIcon} />
                             </Title>
                         </Flex>
                         <Flex flexDirection="col" alignItems="start" className="mt-5">
-                            <Text>
-                                Nombre: *
+                            <Text className="capitalize">
+                                {t('breedsModalName')}: *
                             </Text>
-                            <TextInput icon={PencilIcon} name="razaName" className="max-w-max" />
+                            <TextInput placeholder="Pug" icon={PencilIcon} name="razaName" className="max-w-max" />
                         </Flex>
                         <Flex className="mt-5" flexDirection="col" alignItems="start">
                             <Flex flexDirection="col" alignItems="start">
-                                <Text>
-                                    Tipo de mascota: *
+                                <Text className="capitalize">
+                                    {t('breedsModalType')}: *
                                 </Text>
                                 <Select  
+                                    placeholder={t('breedsModalTypePlaceholder')}
                                     disabled={fetch}
                                     icon={BookOpenIcon}
                                     name='razaType' 
@@ -115,23 +114,21 @@ export const RazaModal = ({ type, close, setData }: Props) => {
                                     }} 
                                     className={`max-w-[70%] xs:max-w-[50%] ${petType.length > 0 ? 'hidden' : 'block'}`}
                                 >
-                                    <TextInput onChange={(e) => handleChange(e)} className="rounded-b-none" icon={MagnifyingGlassIcon} name="typeSearch" placeholder="Perro" />
+                                    <TextInput onChange={(e) => handleChange(e)} className="rounded-b-none" icon={MagnifyingGlassIcon} name="typeSearch" placeholder={t('breedsModalTypePlaceholder')} />
                                         {
                                             filteredArr?.length > 0 
                                             ? filteredArr.map((value) => (
-                                                <SelectItem key={value.id} icon={ChevronRightIcon} value={value.name}>
+                                                <SelectItem className={`${typeVisible ? 'last-of-type:mb-24' : 'last-of-type:mb-14'}`} key={value.id} icon={ChevronRightIcon} value={value.name}>
                                                     {value.name}
                                                 </SelectItem>
                                             )) :
-                                            <Text className="px-2 py-3 text-center">
-                                                No hay tipos disponibles,
-                                                Puedes crear un nuevo tipo dando clic
-                                                al siguiente boton
+                                            <Text className={`px-2 py-3 text-center ${typeVisible ? 'last-of-type:mb-24' : 'last-of-type:mb-14'}`}>
+                                                {t('breedsModalNoTypes')}
                                             </Text>
                                         }
-                                        <Flex justifyContent="end" className={`p-2 ${typeVisible ? 'hidden':'flex'}`}>
-                                            <Button type="button" onClick={() => setTypeVisible(true)} variant="secondary">
-                                                Crear nuevo
+                                        <Flex justifyContent="end" className={`p-2 absolute bottom-1.5 left-0 bg-white rounded-b-tremor-default ${typeVisible ? 'hidden':'flex'}`}>
+                                            <Button className="capitalize" type="button" onClick={() => setTypeVisible(true)} variant="secondary">
+                                                {t('breedsModalCreateTypeAction')}
                                             </Button>
                                         </Flex>
                                         {typeVisible && <PetTypeModal type="create" setNewData={handleNewType} setModal={setModal} />}
@@ -157,14 +154,14 @@ export const RazaModal = ({ type, close, setData }: Props) => {
                                 </div>
                             </Flex>
                         <Flex flexDirection="col" alignItems="start" className="mt-4">
-                            <Text>
-                                Descripcion: *
+                            <Text className="capitalize">
+                                {t('breedsModalDesc')}: *
                             </Text>
-                            <Textarea name="razaDesc" />
+                            <Textarea placeholder="..." name="razaDesc" />
                         </Flex>
                         <Flex className="mt-4 pt-3 border-t" justifyContent="end">
-                            <Button type="submit" iconPosition="right" icon={PaperAirplaneIcon}>
-                                {type === 'create' ? 'Crear' : 'Editar'}
+                            <Button className="capitalize" type="submit" iconPosition="right" icon={PaperAirplaneIcon}>
+                                {type === 'create' ? t('breedsModalActionCreate') : t('breedsModalActionEdit')}
                             </Button>
                         </Flex>
                     </form>

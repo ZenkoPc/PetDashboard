@@ -17,15 +17,15 @@ export const Header = ({ title, desc, buttonText, buttonAction }: Props) => {
             <Flex className="mt-5 w-full" flexDirection="col" alignItems="start">
                     <Flex justifyContent="between" className="w-full gap-3 flex-col md:flex-row ">
                         <Flex flexDirection="col" alignItems="start">
-                            <Title>
+                            <Title className="capitalize">
                                 {title}
                             </Title>
-                            <Text>
+                            <Text className="capitalize">
                                 {desc}
                             </Text>
                         </Flex>
                        {role !== 'viewer' && <Flex justifyContent="end">
-                            <Button onClick={() => buttonAction(true)} icon={PlusIcon} className="rounded-tremor-full py-3">
+                            <Button onClick={() => buttonAction(true)} icon={PlusIcon} className="rounded-tremor-full capitalize py-3">
                                 {buttonText}
                             </Button>
                         </Flex>}

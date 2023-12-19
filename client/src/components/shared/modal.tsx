@@ -17,7 +17,7 @@ export const BaseModal = ({ color, method, message, close }: Props) => {
                     <Flex>
                         <div className="h-full flex items-center">
                             <Icon color={color} icon={InformationCircleIcon} />
-                            <span className="font-medium p-0 mr-2">
+                            <span className="font-medium p-0 mr-2 capitalize">
                                 {method}
                             </span>
                             {message}

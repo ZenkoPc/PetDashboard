@@ -1,0 +1,133 @@
+{
+    "breeds": "Razas",
+    "breedsDesc": "administra las razas existentes desde este modulo",
+    "breedsDescViewer": "visualiza las razas existentes desde este modulo",
+    "breedsCreate": "Crear raza",
+    "breedsTableHeaders": [
+        "Nombre","tipo de mascosta","descripcion"
+    ],
+    "breedsModalTitleCreate": "Crear nueva raza",
+    "breedsModalTitleEdit": "Editar raza",
+    "breedsModalName": "nombre",
+    "breedsModalType": "tipo de mascota",
+    "breedsModalDesc": "descripcion",
+    "breedsModalActionCreate": "crear",
+    "breedsModalActionEdit": "editar",
+    "breedsModalTypePlaceholder": "Perro",
+    "breedsModalNoTypes": "No hay tipos disponibles, Puedes crear un nuevo tipo dando clic al siguiente boton",
+    "breedsModalCreateTypeAction": "crear",
+
+    "pets": "Mascotas",
+    "petsDesc": "Administra a todas las mascotas desde este modulo",
+    "petsDescViewer": "Visualiza a todas las mascotas desde este modulo",
+    "petsCreate": "Crear mascosta",
+    "petsTableHeaders": [
+        "nombre","raza","dueño"
+    ],
+    "petsModalName": "nombre",
+    "petsModalBreed": "raza de la mascota",
+    "petsModalOwner": "dueño de la mascota",
+    "petsModalDesc": "caracteristicas",
+    "petsModalTitleCreate": "Crear una nueva mascota",
+    "petsModalTitleEdit": "Editar mascota",
+    "petsModalActionCreate": "crear",
+    "petsModalActionEdit": "editar",
+    "petsModalNoOwners": "No hay dueños disponibles, Puedes crear un nuevo dueño dando clic al siguiente boton",
+    "petsModalNoBreeds": "No hay Razas disponibles, Puedes crear una nueva raza dando clic al siguiente boton",
+    "petsModalOwnersCreate": "Crear nuevo",
+    "petsModalBreedsCreate": "Crear nueva",
+
+    "petTypes": "Tipos de mascotas",
+    "petTypesDesc": "Administra a todos los tipos de mascotas registrados desde este modulo",
+    "petTypesCreate": "Crear nuevo tipo",
+    "petTypesDescViewer": "Visualiza a todos los tipos de mascota desde este modulo",
+    "petTypesTableHeaders": ["Tipo de mascota"],
+    "petTypesDeleteTitle": "¿Estas seguro de eliminar este tipo de mascota?",
+    "petTypesCreateTitle": "Crear nuevo tipo",
+    "petTypesEditTitle": "Editar tipo de mascota",
+    "petTypesCreateAction": "Crear",
+    "petTypesEditAction": "Editar",
+    "petTypesModalHeaders": "nombre",
+    "petTypesPlaceholder": "Perro",
+    "petTypesSuccess": "Exito!",
+    "petTypesFailed": "Error!",
+    "petTypesSuccessDelete": "El tipo de mascota fue removido exitosamente",
+    "petTypesSuccessEdit": "El tipo de mascota fue editado exitosamente",
+    "petTypesSuccessCreate": "El tipo de mascota fue creado exitosamente",
+
+    "owners": "Dueños",
+    "ownersDesc": "administra los dueños/clientes desde esta seccion",
+    "ownersDescViewer": "visualiza los dueños/clientes desde esta seccion",
+    "ownersCreate": "Crear Dueño",
+    "ownersTableHeaders": [
+        "nombre","correo","direccion","contacto"
+    ],
+    "ownersActions": "Acciones",
+    "ownersCreateModal": "Crear nuevo dueño",
+    "ownersEditModal": "Editar dueño",
+    "ownersModalHeaders": [
+        "nombre completo","# de contacto 1","# de contacto 2","correo","direccion"
+    ],
+    "ownersCreateSendAction": "Crear",
+    "ownersEditSendAction": "Editar",
+
+    "users": "Usuarios",
+    "usersDesc": "Administra a todos los usuarios desde este modulo",
+    "usersCreateButton": "nuevo usuario",
+    "usersTab": "Todos los usuarios",
+    "usersHeaders": [
+        "Nombre","apellido","correo","rol","acciones"
+    ],
+    "usersRegister": "Registrar usuario",
+    "usersEdit": "Editar usuario",
+    "usersEditHeaders": [
+        "Nombre","apellido","correo","contraseña","rol"
+    ],
+    "usersAction": "Enviar",
+    "usersSuccess": "Exito!",
+    "usersSuccessCreateMessage": "El usuario ha sido creado con exito",
+    "usersFailed": "Error!",
+    "usersFailedMessage": "Ocurrio un error",
+    "usersDelete": "¿Estas seguro de eliminar este usuario?",
+    "usersDeleteDesc": "Esta accion es permanente y no puede ser desecha!",
+    "usersDeleteAction": "Eliminar",
+    "usersEditMessage": "El usuario ha sido editado exitosamente",
+    "usersDeleteMessage": "El usuario ha sido removido exitosamente",
+
+    "settings": "Configuracion",
+    "settingsDesc": "Personaliza el menu de la forma que desees",
+    "settingsTheme": "Cambiar tema",
+    "settingsThemeChangeDark": "Cambiar a modo Oscuro",
+    "settingsThemeChangeLight": "Cambiar a modo Claro",
+    "settingsChangeLanguage": "Cambiar idioma",
+    "language": "Ingles",
+    "language2": "Español",
+
+    "deleteModalMessage": "Esta accion no puede ser desecha y es permanente",
+    "deleteModalAction": "eliminar",
+
+    "routesHome": "Inicio",
+    "routesDates": "Citas",
+    "routesBreeds": "Razas",
+    "routesPets": "Mascotas",
+    "routesPetTypes": "Tipos de mascotas",
+    "routesOwners": "Dueños",
+    "routesUsers": "Usuarios",
+    "routesSettings": "Configuracion",
+    "routesClose": "Cerrar sesion",
+
+    "noTableData": "No hay informacion para mostrar",
+    "noResultsData": "No hay resultados para tu busqueda",
+    "showResults": "Mostrar",
+    "greetings": "Hola",
+
+    "404Title": "Oops ha ocurrido un error",
+    "404Message": "La pagina a la que intentas ir no existes, vuelve al inicio",
+    "404Action": "Volver",
+
+    "login": "Inicio de sesion",
+    "loginUser": "Correo:",
+    "loginPass": "contraseña:",
+    "loginAction": "Iniciar sesion"
+
+}

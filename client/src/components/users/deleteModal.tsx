@@ -1,8 +1,11 @@
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 import { XMarkIcon } from "@heroicons/react/24/solid"
 import { Button, Card, Text, Title } from "@tremor/react"
+import { useTranslation } from "react-i18next"
 
 export const DeleteModal = ({ handleDelete, visible }:{ handleDelete: () => void, visible: () => void }) => {
+
+    const { t } = useTranslation()
 
     return (
         <>
@@ -13,14 +16,14 @@ export const DeleteModal = ({ handleDelete, visible }:{ handleDelete: () => void
                         </Button>
                     </div>
                     <ExclamationCircleIcon color="red" className="w-[200px] mx-auto" />
-                    <Title className="text-xl">
-                        ¿Estas seguro de eliminar este usuario?
+                    <Title className="text-xl capitalize">
+                        {t('usersDelete')}
                     </Title>
-                    <Text color="red">
-                        Esta accion es permanente y no puede ser desecha!
+                    <Text color="red" className="capitalize">
+                        {t('usersDeleteDesc')}
                     </Text>
-                    <Button onClick={handleDelete} variant="secondary" color="red" className="mt-4">
-                        Eliminar
+                    <Button onClick={handleDelete} variant="secondary" color="red" className="mt-4 capitalize">
+                        {t('usersDeleteAction')}
                     </Button>
                 </Card>
             </div>

@@ -5,15 +5,19 @@ import { TableShared } from "../shared/table"
 import { OwnersModal } from "./modal"
 import { useUserStatus } from "../../store/useUserStatus"
 import { Origin } from "../../types/enum"
+import { useTranslation } from "react-i18next"
 
 export const OwnersHome = () => {
 
     const [createModal, setCreateModal] = useState(false)
     const role = useUserStatus(store => store.role)
+    const { t } = useTranslation()
 
     const handleViewer = (value: boolean) => {
         setCreateModal(value)
     }
+
+    const arr: string[] = t('ownersTableHeaders',{ returnObjects: true })
 
     return(
         <>
@@ -21,13 +25,13 @@ export const OwnersHome = () => {
             <main className="h-screen max-h-screen overflow-y-scroll [&>*]:px-5 pb-10 w-full">
                 <LogoDashboard />
                 <Header 
-                    title={"Dueños"} 
-                    desc={role !== 'viewer' ? "Administra los dueños/clientes desde esta seccion" : "Ve los dueños registrados desde este modulo"} 
-                    buttonText={"Crear Dueño"} 
+                    title={t('owners')} 
+                    desc={role !== 'viewer' ? t('ownersDesc') : t('ownersDescViewer')} 
+                    buttonText={t('ownersCreate')} 
                     buttonAction={() => handleViewer(true)}
                 />
                 <TableShared 
-                    tableHeaders={['Nombre', 'Correo', 'Direccion', 'Contacto']}
+                    tableHeaders={arr}
                     data={[]}
                     origin={Origin.Owner}
                     editFn={() => alert('edit')}

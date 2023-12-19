@@ -6,6 +6,8 @@ import { XMarkIcon } from "@heroicons/react/24/solid"
 import { RazaModal } from "../razas/modal"
 import { BaseModal } from "../shared/modal"
 import { OwnersModal } from "../owners/modal"
+import { resetModal } from "../../helpers/resetData"
+import { useTranslation } from "react-i18next"
 
 interface Props{
     type: string
@@ -21,19 +23,8 @@ export const ModalPet = ({ type, closeModal }: Props) => {
     const [dueno, setDueno] = useState('')
     const [ownerModal, setOwnerModal] = useState(false)
     const [razaModal, setRazaModal] = useState(false)
-    const [modal, setModal] = useState<ModalProps>({
-        status: false,
-        method: '',
-        message: '',
-        color: 'red'
-    })
-
-    const reset = {
-        status: false,
-        method: '',
-        message: '',
-        color: 'red'
-    }
+    const [modal, setModal] = useState<ModalProps>(resetModal)
+    const { t } = useTranslation()
 
     const arr = ['Labrador','asda'].map((data) => data.toLowerCase())
     const arr2 = ['Jose','Alameda'].map((data) => data.toLowerCase())
@@ -90,7 +81,7 @@ export const ModalPet = ({ type, closeModal }: Props) => {
     }
 
     const handleErrorClose = () => {
-        setModal(reset)
+        setModal(resetModal)
     }
 
     const handleCloseOwner = () => {
@@ -103,48 +94,47 @@ export const ModalPet = ({ type, closeModal }: Props) => {
             {ownerModal && <OwnersModal type="create" setData={handleNewOwner} close={handleCloseOwner} />}
             {razaModal && <RazaModal type="create" close={setRazaModal} setData={handleNewRaza} />}
             <Card className="max-w-[600px] h-[500px] animate-fade-up">
-                <Title className="border-b pb-5 flex justify-between items-center">
-                    {type === 'create' ? 'Crear una nueva Mascota' : 'Editar una mascota'}
+                <Title className="border-b pb-5 capitalize flex justify-between items-center">
+                    {type === 'create' ? t('petsModalTitleCreate') : t('petsModalTitleEdit')}
                     <Button onClick={() => closeModal(false)} icon={XMarkIcon} variant="light" color="gray" />
                 </Title>
-                <form onChange={() => setModal(reset)} onSubmit={handleSubmit}>
+                <form onChange={() => setModal(resetModal)} onSubmit={handleSubmit}>
                 <Flex flexDirection="col" alignItems="start" className="mt-4">
                     <Text>
-                        Nombre: *
+                        {t('petsModalName')}: *
                     </Text>
-                    <TextInput icon={PencilIcon} required className="max-w-max" name="petName" />
+                    <TextInput placeholder="Orion" icon={PencilIcon} required className="max-w-max" name="petName" />
                 </Flex>
                 <Flex className="mt-5 flex-col" alignItems="start">
                     <Flex flexDirection="col" alignItems="start">
                         <Text>
-                            Raza de la mascota: *
+                            {t('petsModalBreed')}: *
                         </Text>
                         <Select 
+                            placeholder="Pug"
                             icon={BookOpenIcon}
                             name='petRaza' 
                             defaultValue='' 
                             value={raza} 
                             onValueChange={(e) => {
-                                setModal(reset)
+                                setModal(resetModal)
                                 setRaza(e)
                             }} 
                             className={`max-w-[230px] ${raza.length > 0 ? 'hidden' : 'block'}`}
                         >
-                            <TextInput onChange={(e) => handleChange(e, 'raza')} className="rounded-b-none" icon={MagnifyingGlassIcon} name="razaSearch" placeholder="labrador" />
+                            <TextInput onChange={(e) => handleChange(e, 'raza')} className="rounded-b-none" icon={MagnifyingGlassIcon} name="razaSearch" placeholder="Pug" />
                             {
                                 filteredArrRaza.length > 0 
                                 ? filteredArrRaza.map((value) => (
                                     <SelectItem key={value} value={value} icon={ChevronRightIcon} />
                                 ))
                                 : <Text className="px-2 py-3 text-center">
-                                    No hay Razas disponibles,
-                                    Puedes crear una nueva raza dando clic
-                                    al siguiente boton
+                                    {t('petsModalNoBreeds')}
                                 </Text>
                             }
                             <Flex justifyContent="end" className="p-2">
                                 <Button type="button" onClick={() => setRazaModal(true)} variant="secondary">
-                                    Crear nueva
+                                    {t('petsModalBreedsCreate')}
                                 </Button>
                             </Flex>
                         </Select>
@@ -168,15 +158,16 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                 <Flex className="mt-5 flex-col" alignItems="start">
                     <Flex flexDirection="col" alignItems="start" className="md:max-w-[50%]">
                         <Text>
-                            Dueño de la mascota: *
+                            {t('petsModalOwner')}: *
                         </Text>
                         <Select 
+                            placeholder="John Doe - 888999"
                             icon={UserIcon}
                             name='petOwner' 
                             defaultValue='' 
                             value={dueno} 
                             onValueChange={(e) => {
-                                setModal(reset)
+                                setModal(resetModal)
                                 setDueno(e)
                             }} 
                             className={`max-w-[230px] ${dueno.length > 0 ? 'hidden' : 'block'}`}
@@ -188,14 +179,12 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                                     <SelectItem key={value} value={value} icon={ChevronRightIcon} />
                                 ))
                                 : <Text className="px-2 py-3 text-center">
-                                    No hay dueños disponibles,
-                                    Puedes crear un nuevo dueño dando clic
-                                    al siguiente boton
+                                    {t('petsModalNoOwners')}
                                 </Text>
                             }
                             <Flex justifyContent="end" className="p-2">
                                 <Button onClick={() => setOwnerModal(true)} type="button" variant="secondary">
-                                    Crear nuevo
+                                    {t('petsModalOwnersCreate')}
                                 </Button>
                             </Flex>
                         </Select>
@@ -218,13 +207,13 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                 </Flex>
                 <Flex flexDirection="col" alignItems="start" className="mt-4">
                     <Text>
-                        Caracteristicas: *
+                        {t('petsModalDesc')}: *
                     </Text>
-                    <Textarea name="petDesc" />
+                    <Textarea placeholder="..." name="petDesc" />
                 </Flex>
                 <Flex justifyContent="end" className="pt-5 mt-5 border-t">
-                    <Button type="submit" iconPosition="right" icon={PaperAirplaneIcon}>
-                        {type === 'create' ? 'Crear' : 'Editar'}
+                    <Button className="capitalize" type="submit" iconPosition="right" icon={PaperAirplaneIcon}>
+                        {type === 'create' ? t('petsModalActionCreate') : t('petsModalActionEdit')}
                     </Button>
                 </Flex>
                 </form>

@@ -1,6 +1,7 @@
 import { XMarkIcon, PaperAirplaneIcon } from "@heroicons/react/24/solid"
 import { Title, Text, Flex, SelectItem, Card, Button, TextInput, Select } from "@tremor/react"
 import { User } from "../../types/types"
+import { useTranslation } from "react-i18next"
 
 interface Props {
     close: () => void,
@@ -12,6 +13,7 @@ interface Props {
 export const UpdateModal = ({ close, user, handleUpdate, error }: Props) => {
 
     const id = user.id
+    const { t } = useTranslation()
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -39,42 +41,42 @@ export const UpdateModal = ({ close, user, handleUpdate, error }: Props) => {
                         <Button onClick={close} color="neutral" variant="light" icon={XMarkIcon} className="p-0">
                         </Button>
                     </div>
-                    <Title className="text-xl">
-                        Actualizar
+                    <Title className="text-xl capitalize">
+                        {t('usersEdit')}
                     </Title>
                     <form onSubmit={handleSubmit}>
                         <Flex className="gap-7" flexDirection="col">
                             <Flex className="mt-5 w-full gap-4 flex-col md:flex-row">
                                 <Flex flexDirection="col" alignItems="start">
-                                    <Text>
-                                        Nombre:
+                                    <Text className="capitalize">
+                                        {t('usersEditHeaders.0')}:
                                     </Text>
                                     <TextInput defaultValue={user?.name} name="named" required={true} type="text" placeholder="John" />
                                 </Flex>
                                 <Flex flexDirection="col" alignItems="start">
-                                    <Text>
-                                        Apellido:
+                                    <Text className="capitalize">
+                                        {t('usersEditHeaders.1')}:
                                     </Text>
                                     <TextInput defaultValue={user?.lastname} name="lastname" required={true} type="text" placeholder="Doe" />
                                 </Flex>
                             </Flex>
                             <Flex className="w-full gap-4 flex-col md:flex-row">
                                 <Flex flexDirection="col" alignItems="start">
-                                    <Text>
-                                        Correo:
+                                    <Text className="capitalize">
+                                        {t('usersEditHeaders.2')}:
                                     </Text>
                                     <TextInput defaultValue={user?.email} name="email" type="email" placeholder="JohnDoe@gmail.com" />
                                 </Flex>
                                 <Flex flexDirection="col" alignItems="start">
-                                    <Text>
-                                        Contraseña:
+                                    <Text className="capitalize">
+                                        {t('usersEditHeaders.3')}:
                                     </Text>
                                     <TextInput defaultValue={user?.password} name="password" type="password" placeholder="***********" />
                                 </Flex>
                             </Flex>
                             <div className="text-left w-full">
-                                <Text>
-                                    Role:
+                                <Text className="capitalize">
+                                    {t('usersEditHeaders.4')}:
                                 </Text>
                                 <Select name='roles' defaultValue={user?.role}>
                                     <SelectItem value={"editor"}>
@@ -90,7 +92,7 @@ export const UpdateModal = ({ close, user, handleUpdate, error }: Props) => {
                             {error}
                         </Text>
                         <Button type="submit" variant="primary" className="mt-8" iconPosition="right" icon={PaperAirplaneIcon}>
-                            Enviar
+                            {t('usersAction')}
                         </Button>
                     </form>
                 </Card>

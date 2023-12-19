@@ -3,11 +3,13 @@ import { Button, Title } from "@tremor/react"
 import { useState } from "react"
 import { MenuResponsive } from "./menuResponsive"
 import { useUserStatus } from "../store/useUserStatus"
+import { useTranslation } from "react-i18next"
 
 export const LogoDashboard = () => {
 
     const [menu, setMenu] = useState(false)
     const userData = useUserStatus(store => store.userData)
+    const { t } = useTranslation()
 
     const handleClose = () => {
         setMenu(false)
@@ -30,7 +32,7 @@ export const LogoDashboard = () => {
                         </div>
                     </div>
                     <Title color="blue" className="mr-3 hidden md:block">
-                        Hola, {userData.name} {userData.lastname}
+                        {t('greetings')}, {userData.name} {userData.lastname}
                     </Title>
                 </div>
             </div>

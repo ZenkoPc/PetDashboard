@@ -5,11 +5,13 @@ import { TableShared } from "../shared/table"
 import { RazaModal } from "./modal"
 import { useUserStatus } from "../../store/useUserStatus"
 import { Origin } from "../../types/enum"
+import { useTranslation } from "react-i18next"
 
 export const RazaHome = () => {
 
     const [create, setCreate] = useState(false)
     const role = useUserStatus(store => store.role)
+    const { t } = useTranslation()
 
     const handleViewer = (value: boolean) => {
         setCreate(value)
@@ -21,13 +23,13 @@ export const RazaHome = () => {
             <main className="h-screen max-h-screen overflow-y-scroll [&>*]:px-5 pb-10 w-full">
                 <LogoDashboard />
                 <Header 
-                    title={"Razas"} 
-                    desc={role !== 'viewer' ? "Administra las razas existentes para las mascotas desde este modulo" : "Visualiza las razas existentes desde este modulo"} 
-                    buttonText={"Crear Raza"} 
+                    title={t('breeds')} 
+                    desc={role !== 'viewer' ? t('breedsDesc') : t('breedsDescViewer')} 
+                    buttonText={t('breedsCreate')} 
                     buttonAction={() => handleViewer(true)}                
                 />
                 <TableShared 
-                    tableHeaders={['Nombre', 'Tipo de mascota', 'Descripcion']}
+                    tableHeaders={t('breedsTableHeaders', { returnObjects: true })}
                     data={[]} 
                     origin={Origin.Breed} 
                     fetching={false} 
