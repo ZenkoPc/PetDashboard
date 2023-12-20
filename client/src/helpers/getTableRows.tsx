@@ -9,7 +9,7 @@ interface Props{
     data: PetType[] | undefined
     origin: Origin
     headersLength: number
-    editFn: ({ id, name}: PetType) => void
+    editFn: (value: PetType) => void
     deleteFn: (id: string) => void
 }
 

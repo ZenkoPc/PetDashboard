@@ -19,6 +19,7 @@ import { PetHome } from './components/pets/petHome.tsx'
 import { RazaHome } from './components/razas/razaHome.tsx'
 import { OwnersHome } from './components/owners/ownersHome.tsx'
 import { PetTypesHome } from './components/petTypes/petTypesHome.tsx'
+import { ErrorBoundary } from './helpers/error.tsx'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
+    errorElement: <ErrorBoundary /> ,
     element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
     children: [
       {

@@ -5,6 +5,7 @@ import { getTheme, setTheme } from "./helpers/theme.ts";
 import './i18n.ts'
 import { getLanguage } from "./helpers/language.ts";
 import i18n from 'i18next'
+import { Suspense } from "react";
 
 const client = new QueryClient()
 const language = getLanguage()
@@ -25,7 +26,9 @@ if(theme === 'dark'){
 i18n.changeLanguage(language)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <QueryClientProvider client={client}>
-   <App />
-  </QueryClientProvider>
+  <Suspense fallback={<p>...</p>}>
+    <QueryClientProvider client={client}>
+    <App />
+    </QueryClientProvider>
+  </Suspense>
 )

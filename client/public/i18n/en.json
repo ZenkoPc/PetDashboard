@@ -125,6 +125,9 @@
     "404Message": "The page does not exist, go back to index",
     "404Action": "Go back",
 
+    "errorTitle": "An error has ocurred!",
+    "errorMessage": "An error has appeared!, go back to the index",
+
     "login": "Login",
     "loginUser": "Email:",
     "loginPass": "Password:",

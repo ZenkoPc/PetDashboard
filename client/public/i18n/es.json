@@ -125,6 +125,9 @@
     "404Message": "La pagina a la que intentas ir no existes, vuelve al inicio",
     "404Action": "Volver",
 
+    "errorTitle": "Ocurrio un error!",
+    "errorMessage": "Un error ha ocurrido, por favor vuelve al inicio",
+
     "login": "Inicio de sesion",
     "loginUser": "Correo:",
     "loginPass": "contraseña:",

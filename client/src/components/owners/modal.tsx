@@ -75,7 +75,7 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
                                 <Text className="capitalize">
                                     {t('ownersModalHeaders.0')}: *
                                 </Text>
-                                <TextInput icon={UserIcon} name="ownerName" className="max-w-max" />
+                                <TextInput placeholder="John Doe" icon={UserIcon} name="ownerName" className="max-w-max" />
                             </Flex>
                             <Flex>
                                 <Grid numItems={1} numItemsMd={2} className="gap-3">
@@ -84,7 +84,7 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
                                             <Text className="capitalize">
                                                 {t('ownersModalHeaders.1')} *
                                             </Text>
-                                            <TextInput icon={PhoneIcon} name="ownerContact1" />
+                                            <TextInput placeholder="318455555" icon={PhoneIcon} name="ownerContact1" />
                                         </Flex>
                                     </Col>
                                     <Col>
@@ -92,7 +92,7 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
                                             <Text className="capitalize">
                                                 {t('ownersModalHeaders.2')}
                                             </Text>
-                                            <TextInput icon={PhoneIcon} name="ownerContact2" />
+                                            <TextInput placeholder="8965428" icon={PhoneIcon} name="ownerContact2" />
                                         </Flex>
                                     </Col>
                                 </Grid>
@@ -101,13 +101,13 @@ export const OwnersModal = ({ type, close, setData }: Props) => {
                                 <Text className="capitalize">
                                     {t('ownersModalHeaders.3')} *
                                 </Text>
-                                <TextInput icon={AtSymbolIcon} name="ownerEmail" className="max-w-max"/>
+                                <TextInput placeholder="john@gmail.com" icon={AtSymbolIcon} name="ownerEmail" className="max-w-max"/>
                             </Flex>
                             <Flex flexDirection="col" alignItems="start">
                                 <Text className="capitalize">
                                     {t('ownersModalHeaders.4')}: *
                                 </Text>
-                                <TextInput icon={HomeModernIcon} name="ownerAddress" className="max-w-[300px]" />
+                                <TextInput placeholder="Cr 12 #45z12" icon={HomeModernIcon} name="ownerAddress" className="max-w-[300px]" />
                             </Flex>
                         </Flex>
                         <Flex justifyContent="end" className="border-t mt-5 pt-4">
