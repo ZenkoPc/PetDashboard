@@ -33,23 +33,23 @@ export interface Pet{
     id: string
     name: string
     desc: string
-    raza: Breed
-    owner: Owner
+    raza: string
+    owner: string
 }
 
-export interface Owner{
-    id: string
-    name: string
-    email: string
-    address: string
-    contact1: string
-    contact2: string
+export type Owner = {
+    id: string,
+    name: string,
+    email: string,
+    address: string,
+    contact1: string,
+    contact2: string | undefined
 }
 
 export interface Breed{
     id: string
     name: string
-    type: PetType
+    type: string
     desc: string
 }
 
@@ -68,10 +68,10 @@ export interface ModalDeleteProps{
 
 export interface TableProps{
     tableHeaders: string[]
-    data: PetType[] | undefined
+    data: PetType[] | Owner[] | Breed[] | Pet[] | undefined
     fetching: boolean
     error: boolean
-    editFn: (data: PetType) => void
+    editFn: (data) => void
     deleteFn: (id: string) => void
     origin: Origin
 }
@@ -79,5 +79,35 @@ export interface TableProps{
 export interface ModalPetTypeEditProps{
     status: boolean
     selectedId: string
+    selected: string
+}
+
+export interface ModalOwnersEditProps{
+    status: boolean
+    selected: Owner
+}
+
+export interface ModalOwnersDeleteProps{
+    status: boolean,
+    selected: string
+}
+
+export interface ModalBreedsEditProps{
+    status: boolean
+    selected: Breed
+}
+
+export interface ModalBreedsDeleteProps{
+    status: boolean
+    selected: string
+}
+
+export interface ModalPetsEditProps{
+    status: boolean
+    selected: Pet
+}
+
+export interface ModalPetsDeleteProps{
+    status: boolean
     selected: string
 }

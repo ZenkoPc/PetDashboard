@@ -11,11 +11,12 @@ import { useTranslation } from "react-i18next"
 
 interface Props{
     type: string
-    data?: Pet
-    closeModal: (value: boolean) => void
+    closeModal: () => void
+    selected?: Pet
+    submitAction: (value: Pet) => void
 }
 
-export const ModalPet = ({ type, closeModal }: Props) => {
+export const ModalPet = ({ type, closeModal, selected, submitAction }: Props) => {
 
     const [razaFilter, setRazaFilter] = useState('')
     const [ownerFilter, setOwnerFilter] = useState('')
@@ -45,22 +46,22 @@ export const ModalPet = ({ type, closeModal }: Props) => {
         const owner = e.currentTarget.petOwner.value
         const desc = e.currentTarget.petDesc.value
 
-        if(name && raza && owner && desc){
-            console.log(name, raza, owner, desc)
-            setModal({
-                status: true,
-                method: 'Un error ha ocurrido!',
-                message: 'Funcionalidad Proximamente',
-                color: 'red'
-            })
-        }else{
-            setModal({
-                status: true,
-                method: 'Un error ha ocurrido!',
-                message: 'Intenta mas tarde',
-                color: 'red'
-            })
+        if(name && raza && owner && desc && type === 'create'){
+            submitAction({ id: '', name, raza, owner, desc })
+            return
         }
+
+        if(name && raza && owner && desc && type === 'create' && selected){
+            submitAction({ id: selected.id, name, raza, owner, desc })
+            return
+        }
+
+        setModal({
+            status: true,
+            color: 'red',
+            message: t('completeInputs'),
+            method: t('petTypesFailed')
+        })
 
     }
 
@@ -96,14 +97,14 @@ export const ModalPet = ({ type, closeModal }: Props) => {
             <Card className="max-w-[600px] h-[500px] animate-fade-up">
                 <Title className="border-b pb-5 capitalize flex justify-between items-center">
                     {type === 'create' ? t('petsModalTitleCreate') : t('petsModalTitleEdit')}
-                    <Button onClick={() => closeModal(false)} icon={XMarkIcon} variant="light" color="gray" />
+                    <Button onClick={closeModal} icon={XMarkIcon} variant="light" color="gray" />
                 </Title>
                 <form onChange={() => setModal(resetModal)} onSubmit={handleSubmit}>
                 <Flex flexDirection="col" alignItems="start" className="mt-4">
                     <Text>
                         {t('petsModalName')}: *
                     </Text>
-                    <TextInput placeholder="Orion" icon={PencilIcon} required className="max-w-max" name="petName" />
+                    <TextInput defaultValue={selected ? selected.name : ''} placeholder="Orion" icon={PencilIcon} required className="max-w-max" name="petName" />
                 </Flex>
                 <Flex className="mt-5 flex-col" alignItems="start">
                     <Flex flexDirection="col" alignItems="start">
@@ -114,7 +115,7 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                             placeholder="Pug"
                             icon={BookOpenIcon}
                             name='petRaza' 
-                            defaultValue='' 
+                            defaultValue={selected ? selected.raza : ''}
                             value={raza} 
                             onValueChange={(e) => {
                                 setModal(resetModal)
@@ -164,7 +165,7 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                             placeholder="John Doe - 888999"
                             icon={UserIcon}
                             name='petOwner' 
-                            defaultValue='' 
+                            defaultValue={selected ? selected.owner : ''}
                             value={dueno} 
                             onValueChange={(e) => {
                                 setModal(resetModal)
@@ -209,7 +210,7 @@ export const ModalPet = ({ type, closeModal }: Props) => {
                     <Text>
                         {t('petsModalDesc')}: *
                     </Text>
-                    <Textarea placeholder="..." name="petDesc" />
+                    <Textarea defaultValue={selected ? selected.desc : ''} placeholder="..." name="petDesc" />
                 </Flex>
                 <Flex justifyContent="end" className="pt-5 mt-5 border-t">
                     <Button className="capitalize" type="submit" iconPosition="right" icon={PaperAirplaneIcon}>

@@ -20,7 +20,7 @@ export const LogoDashboard = () => {
             <div style={{ paddingLeft: '0' }} className="w-full border-b flex flex-row justify-between items-center">
                 <div>
                 <MenuResponsive width={`${menu ? '100%' : '0px' }`} close={handleClose} />
-                    <div className="py-5 flex items-center w-full px-5 bg-gradient-to-r from-purple-600 to-purple-950 bg-clip-text text-transparent font-bold text-lg">
+                    <div className="py-5 flex items-center w-full px-5 bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent font-bold text-lg">
                         <Button onClick={() => setMenu(true)} variant="secondary" icon={Bars3Icon} className="mr-3 lg:hidden"></Button>
                         Pet Admin
                     </div>

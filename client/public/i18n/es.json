@@ -16,6 +16,10 @@
     "breedsModalTypePlaceholder": "Perro",
     "breedsModalNoTypes": "No hay tipos disponibles, Puedes crear un nuevo tipo dando clic al siguiente boton",
     "breedsModalCreateTypeAction": "crear",
+    "breedsDeleteMessage": "¿Estas seguro de eliminar esta raza?",
+    "breedsSuccessCreate": "La raza fue creada exitosamente",
+    "breedsSuccessEdit": "La raza fue actualizada exitosamente",
+    "breedsSuccessDelete": "La raza fue removida exitosamente",
 
     "pets": "Mascotas",
     "petsDesc": "Administra a todas las mascotas desde este modulo",
@@ -36,6 +40,10 @@
     "petsModalNoBreeds": "No hay Razas disponibles, Puedes crear una nueva raza dando clic al siguiente boton",
     "petsModalOwnersCreate": "Crear nuevo",
     "petsModalBreedsCreate": "Crear nueva",
+    "petsDeleteMessage": "¿Estas seguro de remover esta mascota?",
+    "petsCreateSuccess": "La mascota ha sido creada exitosamente",
+    "petsEditSuccess": "La mascota ha sido actualizada exitosamente",
+    "petsDeleteSuccess": "La mascota ha sido removida exitosamente",
 
     "petTypes": "Tipos de mascotas",
     "petTypesDesc": "Administra a todos los tipos de mascotas registrados desde este modulo",
@@ -70,6 +78,10 @@
     ],
     "ownersCreateSendAction": "Crear",
     "ownersEditSendAction": "Editar",
+    "ownersSuccessCreate": "El dueño ha sido registrado exitosamente",
+    "ownersSuccessEdit": "El dueño ha sido editado exitosamente",
+    "ownersSuccessDelete": "El dueño ha sido eliminado exitosamente",
+    "ownersDeleteMessage": "¿Estas seguro de eliminar este dueño?",
 
     "users": "Usuarios",
     "usersDesc": "Administra a todos los usuarios desde este modulo",
@@ -131,6 +143,7 @@
     "login": "Inicio de sesion",
     "loginUser": "Correo:",
     "loginPass": "contraseña:",
-    "loginAction": "Iniciar sesion"
+    "loginAction": "Iniciar sesion",
+    "completeInputs": "Complete todos los campos"
 
 }

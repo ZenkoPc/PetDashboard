@@ -33,9 +33,9 @@ export const Settings = () => {
     }
 
     return (
-        <main className="flex flex-col w-full h-screen justify-start items-start">
+        <main className="flex [&>div]:px-5 flex-col w-full h-screen justify-start items-start">
             <LogoDashboard />
-            <div className="px-5 w-full mt-5">
+            <div className="w-full mt-5">
                 <Title>
                     {t('settings')}
                 </Title>

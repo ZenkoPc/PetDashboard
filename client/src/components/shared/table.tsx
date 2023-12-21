@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon, TableCellsIcon, ViewColumnsIcon, } from "@heroicons/react/24/outline"
+import { MagnifyingGlassIcon, Squares2X2Icon, TableCellsIcon } from "@heroicons/react/24/outline"
 import { Button, Card, Flex, Icon, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, TextInput} from "@tremor/react"
 import { useUserStatus } from "../../store/useUserStatus"
 import { useState } from "react"
@@ -29,10 +29,15 @@ export const TableShared = ({ tableHeaders, data, fetching, error, editFn, delet
     return (
         <>
             <div>
-                <Flex className="mt-7 flex-col items-end md:items-center md:flex-row gap-3" justifyContent="end">
-                    <Button disabled={data.length < 1} onClick={() => setVista(!vista)} className="flex justify-center items-center" color="gray" type="button" variant="light">
-                        <Icon color="gray" size="xl" icon={vista ? TableCellsIcon : ViewColumnsIcon} />
-                    </Button>
+                <Flex className="mt-7 flex-col items-end sm:items-center sm:flex-row gap-3" justifyContent="end">
+                    <Flex justifyContent="end" className="gap-2">
+                        <Button disabled={data.length < 1} onClick={() => setVista(false)} className="flex w-9 h-9 p-2 overflow-hidden justify-center items-center" color={vista ? 'gray' : 'blue'} type="button" variant="secondary">
+                            <Icon color={vista ? 'gray' : 'blue'} size="md" icon={TableCellsIcon} />
+                        </Button>
+                        <Button disabled={data.length < 1} onClick={() => setVista(true)} className="flex w-9 h-9 p-2 overflow-hidden justify-center items-center" color={vista ? 'blue' : 'gray'} type="button" variant="secondary">
+                            <Icon color={vista ? 'blue' : 'gray'} size="md" icon={Squares2X2Icon} />
+                        </Button>
+                    </Flex>
                     <Flex className="gap-2 max-w-max flex-col xs:flex-row items-end justify-end">
                         <HeaderPagination setLimit={setLimit} data={data} />
                         <TextInput placeholder="..." disabled={+finalData!.length < 1 && filter.length === 0} onChange={(e) => setFilter(e.currentTarget.value)} icon={MagnifyingGlassIcon} name="search" className="max-w-max" />

@@ -4,7 +4,7 @@ import { Button, Card, Flex, Select, SelectItem, Text, TextInput, Textarea, Titl
 import { useState } from "react"
 import { PetTypeModal } from "../petTypes/modal"
 import { BaseModal } from "../shared/modal"
-import { ModalProps, PetType } from "../../types/types"
+import { Breed, ModalProps, PetType } from "../../types/types"
 import { usePetTypes } from "../../hooks/petTypes/usePetTypes"
 import { resetModal } from "../../helpers/resetData"
 import { useTranslation } from "react-i18next"
@@ -13,9 +13,11 @@ interface Props{
     type: string
     close: (value: boolean) => void
     setData?: (raza: { name: string, types: string }) => void
+    selected?: Breed
+    submitAction?: (value: Breed) => void
 }
 
-export const RazaModal = ({ type, close, setData }: Props) => {
+export const RazaModal = ({ type, close, setData, selected, submitAction }: Props) => {
     
     const [petType, setPetType] = useState('') 
     const [filter, setFilter] = useState('')
@@ -24,10 +26,11 @@ export const RazaModal = ({ type, close, setData }: Props) => {
     const { t } = useTranslation()
 
     const { pets, fetch, refetch }= usePetTypes()
-    const data: PetType[] = pets?.data?.petTypes
+    const petTypesData: PetType[] = pets?.data?.petTypes
+
     const filteredArr = filter.length > 2
-    ? data.filter((value) => value?.name?.includes(filter))
-    : data
+    ? petTypesData.filter((value) => value?.name?.includes(filter))
+    : petTypesData
 
     const handleNewType = (value: string) => {
         setPetType(value)
@@ -45,18 +48,18 @@ export const RazaModal = ({ type, close, setData }: Props) => {
         const types = e.currentTarget.razaType.value
         const desc = e.currentTarget.razaDesc.value
 
-        if(name && types && desc && setData && type === 'create'){
+        if(name.length > 2 && types.length > 2 && desc.length > 2 && setData && type === 'create'){
             +setData!({ name, types })
             return
         }
 
-        if(name && types && desc && type === 'create'){
-            setModal({
-                status: true,
-                message: 'Funcionalidad Proximamente',
-                method: 'A ocurrido un error!',
-                color: 'red'
-            })
+        if(name.length > 2 && types.length > 2 && desc.length > 2 && type === 'create' && submitAction){
+            submitAction({ id: '', name, type: types, desc })
+            return
+        }
+
+        if(name.length > 2 && types.length > 2 && desc.length > 2 && type === 'edit' && selected && submitAction){
+            submitAction({ id: selected?.id, name, type: types, desc })
             return
         }
 
@@ -93,7 +96,7 @@ export const RazaModal = ({ type, close, setData }: Props) => {
                             <Text className="capitalize">
                                 {t('breedsModalName')}: *
                             </Text>
-                            <TextInput placeholder="Pug" icon={PencilIcon} name="razaName" className="max-w-max" />
+                            <TextInput defaultValue={selected ? selected.name : ''} placeholder="Pug" icon={PencilIcon} name="razaName" className="max-w-max" />
                         </Flex>
                         <Flex className="mt-5" flexDirection="col" alignItems="start">
                             <Flex flexDirection="col" alignItems="start">
@@ -105,7 +108,7 @@ export const RazaModal = ({ type, close, setData }: Props) => {
                                     disabled={fetch}
                                     icon={BookOpenIcon}
                                     name='razaType' 
-                                    defaultValue='' 
+                                    defaultValue={selected ? selected.type : ''}
                                     value={petType} 
                                     onValueChange={(e) => {
                                         setTypeVisible(false) 
@@ -157,7 +160,7 @@ export const RazaModal = ({ type, close, setData }: Props) => {
                             <Text className="capitalize">
                                 {t('breedsModalDesc')}: *
                             </Text>
-                            <Textarea placeholder="..." name="razaDesc" />
+                            <Textarea defaultValue={selected ? selected.desc : ''} placeholder="..." name="razaDesc" />
                         </Flex>
                         <Flex className="mt-4 pt-3 border-t" justifyContent="end">
                             <Button className="capitalize" type="submit" iconPosition="right" icon={PaperAirplaneIcon}>

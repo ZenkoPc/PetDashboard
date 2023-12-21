@@ -16,6 +16,10 @@
     "breedsModalTypePlaceholder": "Dog",
     "breedsModalNoTypes": "There is no types for your search, you can add a new one doing clic on the button below",
     "breedsModalCreateTypeAction": "create",
+    "breedsDeleteMessage": "Are you sure to remove this breed?",
+    "breedsSuccessCreate": "The breed was created successfully",
+    "breedsSuccessEdit": "The breed was updated successfully",
+    "breedsSuccessDelete": "The breed was removed successfully",
 
     "pets": "Pets",
     "petsDesc": "Manage the pets from this module as you want",
@@ -36,6 +40,10 @@
     "petsModalNoBreeds": "There is no breeds for your search, you can create a new one doing click on the button below",
     "petsModalOwnersCreate": "Create new",
     "petsModalBreedsCreate": "Create new",
+    "petsDeleteMessage": "Are you sure to remove this pet?",
+    "petsCreateSuccess": "The pet was created successfully",
+    "petsEditSuccess": "The pet was updated successfully",
+    "petsDeleteSuccess": "The pet was removed successfully",
 
     "petTypes": "Pet Types",
     "petTypesDesc": "Manage all the registered pet types from this module",
@@ -70,6 +78,10 @@
     ],
     "ownersCreateSendAction": "Create",
     "ownersEditSendAction": "Edit",
+    "ownersSuccessCreate": "The owner has been created successfully",
+    "ownersSuccessEdit": "The owner has been updated successfully",
+    "ownersSuccessDelete": "The owner has been removed successfully",
+    "ownersDeleteMessage": "Are you sure to remove this owner?",
 
     "users": "Users",
     "usersDesc": "Manage all the users from this module",
@@ -131,6 +143,7 @@
     "login": "Login",
     "loginUser": "Email:",
     "loginPass": "Password:",
-    "loginAction": "Sign in"
+    "loginAction": "Sign in",
+    "completeInputs": "Please complete all the inputs"
 
 }

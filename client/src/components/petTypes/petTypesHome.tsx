@@ -103,11 +103,11 @@ export const PetTypesHome = () => {
                     error={error} 
                     fetching={fetch} 
                     tableHeaders={t('petTypesTableHeaders',{ returnObjects: true })} 
-                    data={pets?.data?.petTypes}
-                    editFn={({ id, name }: PetType) => setEditModal({
+                    data={pets !== undefined ? pets?.data?.petTypes : []}
+                    editFn={(value: PetType) => setEditModal({
                         status: true,
-                        selectedId: id,
-                        selected: name
+                        selectedId: value.id,
+                        selected: value.name
                     })}
                     deleteFn={(id: string) => setDeleteModal({
                         status: true,

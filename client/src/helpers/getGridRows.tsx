@@ -27,8 +27,8 @@ export const GetGridRows = ({ data = [], origin, editFn, deleteFn }: Props) => {
                             {
                                 data?.map((data) => {
                                     return (
-                                        <Col>
-                                            <Card className="flex justify-between">
+                                        <Col key={data.id}>
+                                            <Card decoration="top" decorationColor="blue" className={`flex justify-between bg-tremor-background-muted dark:bg-dark-tremor-background-subtle`}>
                                                 <Flex flexDirection="col" justifyContent="start" alignItems="start">
                                                     <Title className="text-tremor-default">
                                                         {t('petTypesTableHeaders.0')}:

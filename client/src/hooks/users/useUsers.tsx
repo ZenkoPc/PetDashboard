@@ -21,7 +21,7 @@ export const useUsers = () => {
     const usersQuery = useQuery({
         queryKey: ['users'],
         queryFn: () => randomUsers({ token }),
-        staleTime: 6000
+        staleTime: 6000 * 10
     })
 
     return usersQuery
