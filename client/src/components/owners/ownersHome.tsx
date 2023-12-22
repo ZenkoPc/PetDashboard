@@ -71,10 +71,21 @@ export const OwnersHome = () => {
         setCreateModal(value)
     }
 
+    const arr: Owner[] = [
+        {
+            id: 'asd223',
+            name: 'asdasd',
+            email: 'asd@gmail.com',
+            address: 'asdasd 34 656',
+            contact1: '123123',
+            contact2: ''
+        }
+    ]
+
     return(
         <>
-            {createModal && <OwnersModal type="create" create={handleCreate} close={handleViewer} />}
-            {editModal.status && <OwnersModal type="edit" close={handleViewer} edit={handleEdit} />}
+            {createModal && <OwnersModal type="create" create={handleCreate} close={() => handleViewer(false)} />}
+            {editModal.status && <OwnersModal type="edit" selected={editModal.selected} close={() => setEditModal(resetOwnerEditModal)} edit={handleEdit} />}
             {deleteModal.status && <DeleteModal close={closeModal} handleDelete={handleDelete} title={t('ownersDeleteMessage')} id={deleteModal.selected} />}
             {modal.status && <BaseModal color={modal.color} method={modal.method} message={modal.message} close={() => setModal(resetModal)} />}
             <main className="h-screen max-h-screen overflow-y-scroll [&>*]:px-5 pb-10 w-full">
@@ -87,7 +98,7 @@ export const OwnersHome = () => {
                 />
                 <TableShared 
                     tableHeaders={t('ownersTableHeaders',{ returnObjects: true })}
-                    data={owners?.data !== undefined ? owners?.data : []}
+                    data={owners?.data !== undefined ? owners?.data : arr}
                     origin={Origin.Owner}
                     editFn={(value: Owner) => setEditModal({
                         status: true,

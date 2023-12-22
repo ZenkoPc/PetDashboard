@@ -2,7 +2,7 @@ import { MagnifyingGlassIcon, Squares2X2Icon, TableCellsIcon } from "@heroicons/
 import { Button, Card, Flex, Icon, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, TextInput} from "@tremor/react"
 import { useUserStatus } from "../../store/useUserStatus"
 import { useState } from "react"
-import { PetType, TableProps } from "../../types/types"
+import { TableProps } from "../../types/types"
 import { LoadingTable } from "../users/loadingTable"
 import { NoTableData } from "./noTableData"
 import { HeaderPagination } from "./headerPagination"
@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { GetGridRows } from "../../helpers/getGridRows"
 
 export const TableShared = ({ tableHeaders, data, fetching, error, editFn, deleteFn, origin }: TableProps) => {
-
+    
     const { role } = useUserStatus()
     const [filter, setFilter] = useState<string>('')
     const [limit, setLimit] = useState<number>(5)
@@ -19,7 +19,7 @@ export const TableShared = ({ tableHeaders, data, fetching, error, editFn, delet
     const [vista, setVista] = useState<boolean>(false)
    
     const finalData = filter.length > 2
-        ? data?.filter((data: PetType) => data?.name?.includes(filter.toLowerCase()))
+        ? data?.filter((data) => data?.name?.includes(filter.toLowerCase())) 
         : data
     
     const filteredData = finalData?.slice(0,limit)

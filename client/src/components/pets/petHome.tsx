@@ -70,6 +70,16 @@ export const PetHome = () => {
         setCreateModal(value)
     }
     
+    const arr: Pet[] = [
+        {
+            id: 'asd23',
+            name: 'asd',
+            desc: 'asdasd',
+            raza: 'perro',
+            owner: 'alameda'
+        }
+    ]
+
     return(
         <>
             {createModal && <ModalPet type="create" closeModal={() => handleViewer(false)} submitAction={handleCreate} />}
@@ -87,7 +97,7 @@ export const PetHome = () => {
                 <TableShared 
                     origin={Origin.Pet}
                     tableHeaders={t('petsTableHeaders',{ returnObjects: true })}
-                    data={pets?.data !== undefined ? pets?.data : []} 
+                    data={pets?.data !== undefined ? pets?.data : arr} 
                     fetching={false} 
                     error={false} 
                     editFn={(value: Pet) => setEditModal({

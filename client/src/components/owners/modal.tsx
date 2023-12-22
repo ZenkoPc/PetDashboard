@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next"
 
 interface Props{
     type: string
-    close: (value: boolean) => void
+    close: () => void
     setData?: ({ name, contact }:{ name: string, contact: string}) => void
     create?: (value: Owner) => void
     edit?: (value: Owner) => void
@@ -35,15 +35,25 @@ export const OwnersModal = ({ type, close, setData, create, edit, selected }: Pr
                 contact: contact1
             })
             close(true)
+            return
         }
 
         if(name.length > 2 && contact1.length > 2 && email.length && address.length > 2 && type === 'create' && create){
             create({ id:'', name, email, address, contact1, contact2 })
+            return
         }
 
         if(name.length > 2 && contact1.length > 2 && email.length && address.length > 2 && type === 'edit' && selected && edit){
             edit({ id: selected.id, name, email, address, contact1, contact2 })
+            return
         }
+
+        setModal({
+            status: true,
+            color: 'red',
+            method: t('petTypesFailed'),
+            message: t('completeInputs')
+        })
 
     }
 
@@ -63,7 +73,7 @@ export const OwnersModal = ({ type, close, setData, create, edit, selected }: Pr
                                     type === 'create' ? t('ownersCreateModal') : t('ownersEditModal')
                                 }
                             </Title>
-                            <Button type="button" variant="light" color="gray" icon={XMarkIcon} onClick={() => close(false)} />
+                            <Button type="button" variant="light" color="gray" icon={XMarkIcon} onClick={close} />
                         </Flex>
                         <Flex className="mt-4 gap-3" flexDirection="col">
                             <Flex flexDirection="col" alignItems="start">

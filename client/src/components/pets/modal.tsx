@@ -27,7 +27,7 @@ export const ModalPet = ({ type, closeModal, selected, submitAction }: Props) =>
     const [modal, setModal] = useState<ModalProps>(resetModal)
     const { t } = useTranslation()
 
-    const arr = ['Labrador','asda'].map((data) => data.toLowerCase())
+    const arr = ['Labrador','perro','asda'].map((data) => data.toLowerCase())
     const arr2 = ['Jose','Alameda'].map((data) => data.toLowerCase())
 
     const filteredArrRaza = razaFilter.length > 2 
@@ -88,7 +88,7 @@ export const ModalPet = ({ type, closeModal, selected, submitAction }: Props) =>
     const handleCloseOwner = () => {
         setOwnerModal(false)
     }
-
+    
     return(
         <div className="fixed top-0 left-0 w-full h-full z-[20000] bg-black/80 flex justify-center items-center">
             {modal.status && <BaseModal color={modal.color} method={modal.method} message={modal.message} close={handleErrorClose} />}
@@ -115,8 +115,7 @@ export const ModalPet = ({ type, closeModal, selected, submitAction }: Props) =>
                             placeholder="Pug"
                             icon={BookOpenIcon}
                             name='petRaza' 
-                            defaultValue={selected ? selected.raza : ''}
-                            value={raza} 
+                            defaultValue={selected ? selected.raza : raza}
                             onValueChange={(e) => {
                                 setModal(resetModal)
                                 setRaza(e)
@@ -165,8 +164,7 @@ export const ModalPet = ({ type, closeModal, selected, submitAction }: Props) =>
                             placeholder="John Doe - 888999"
                             icon={UserIcon}
                             name='petOwner' 
-                            defaultValue={selected ? selected.owner : ''}
-                            value={dueno} 
+                            defaultValue={selected ? selected.owner : dueno}
                             onValueChange={(e) => {
                                 setModal(resetModal)
                                 setDueno(e)

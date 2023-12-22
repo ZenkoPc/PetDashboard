@@ -29,7 +29,7 @@ export const RazaHome = () => {
     const createFn = useBreedCreate(setModal)
     const edit = useBreedEdit(setModal)
     const remove = useBreedRemove(setModal)
-
+    
     const handleCreate = (value: Breed) => {
         createFn.mutate({ value, token })
     }
@@ -66,11 +66,26 @@ export const RazaHome = () => {
     const handleViewer = (value: boolean) => {
         setCreate(value)
     }
+
+    const arr: Breed[] = [
+        {
+            id: 'aas',
+            name: 'asss',
+            type: 'perro',
+            desc: 'addd'
+        },
+        {
+            id: 'aasa',
+            name: 'asss',
+            type: 'gato',
+            desc: 'has long gold hair and its paws are very big also counts with a very strong teeth'
+        }
+    ]
     
     return (
         <>
             {create && <RazaModal type="create" close={handleViewer} submitAction={handleCreate} />}
-            {editModal.status && <RazaModal type="edit" close={() => setEditModal(resetBreedEditModal)} submitAction={handleEdit} />}
+            {editModal.status && <RazaModal type="edit" close={() => setEditModal(resetBreedEditModal)} selected={editModal.selected} submitAction={handleEdit} />}
             {deleteModal.status && <DeleteModal id={deleteModal.selected} title={t('breedsDeleteMessage')} handleDelete={handleDelete} close={() => setDeleteModal(resetBreedDeleteModal)} />}
             {modal.status && <BaseModal color={modal.color} method={modal.method} message={modal.message} close={() => setModal(resetModal)} />}
             <main className="h-screen max-h-screen overflow-y-scroll [&>*]:px-5 pb-10 w-full">
@@ -83,7 +98,7 @@ export const RazaHome = () => {
                 />
                 <TableShared 
                     tableHeaders={t('breedsTableHeaders', { returnObjects: true })}
-                    data={breeds?.data !== undefined ? breeds?.data : []} 
+                    data={breeds?.data !== undefined ? breeds?.data : arr} 
                     origin={Origin.Breed} 
                     fetching={false} 
                     error={false}        

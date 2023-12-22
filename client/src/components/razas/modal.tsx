@@ -75,7 +75,7 @@ export const RazaModal = ({ type, close, setData, selected, submitAction }: Prop
     const handleModalClose = () => {
         setModal(resetModal)
     }
-
+    
     return (
         <>
             {modal.status && <BaseModal color={modal.color} method={modal.method} message={modal.message} close={handleModalClose} />}
@@ -108,8 +108,7 @@ export const RazaModal = ({ type, close, setData, selected, submitAction }: Prop
                                     disabled={fetch}
                                     icon={BookOpenIcon}
                                     name='razaType' 
-                                    defaultValue={selected ? selected.type : ''}
-                                    value={petType} 
+                                    defaultValue={selected ? selected.type : petType}
                                     onValueChange={(e) => {
                                         setTypeVisible(false) 
                                         setModal(resetModal)

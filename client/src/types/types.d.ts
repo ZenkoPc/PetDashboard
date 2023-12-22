@@ -68,7 +68,8 @@ export interface ModalDeleteProps{
 
 export interface TableProps{
     tableHeaders: string[]
-    data: PetType[] | Owner[] | Breed[] | Pet[] | undefined
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any[] | undefined
     fetching: boolean
     error: boolean
     editFn: (data) => void
